@@ -1,4 +1,10 @@
-@charset "UTF-8";
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>try-out</title>
+    <style>
+        @charset "UTF-8";
         /* http://meyerweb.com/eric/tools/css/reset/ 
            v2.0 | 20110126
            License: none (public domain)
@@ -72,42 +78,24 @@
             border: solid 1px grey;
         }
 
-        @keyframes pulse {
-            0%, 100% {
-                transform: translate(-50%, -50%) scale(1);
-            }
-            50% {
-                transform: translate(-50%, -50%) scale(1.2);
-            }
+        /* Stijl voor de cursor-cirkel */
+        #cursor-circle {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background-color: #ADADAD;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            transition: width 0.2s ease, height 0.2s ease, border-radius 0.2s ease; /* Vloeiende overgang */
         }
 
-        @keyframes pulse-line {
-            0%, 100% {
-                transform: translate(-50%, -50%) scaleY(1);
-            }
-            50% {
-                transform: translate(-50%, -50%) scaleY(1.1);
-            }
-        }
-        @keyframes stretch-and-spin {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg);
-                width: 20px;
-                height: 20px;
-                border-radius: 50%;
-            }
-            50% {
-                transform: translate(-50%, -50%) rotate(90deg);
-                width: 2px;
-                height: 15px;
-                border-radius: 0;
-            }
-            100% {
-                transform: translate(-50%, -50%) rotate(0deg);
-                width: 2px;
-                height: 30px;
-                border-radius: 0;
-            }
+        /* Klasse die wordt toegevoegd wanneer de cursor in tekstselectie-modus is */
+        #cursor-circle.text-select {
+            width: 2px; /* Smalle verticale lijn */
+            height: 20px;
+            border-radius: 0; /* Geen afgeronde hoeken, dus een rechte lijn */
         }
 
         /* Voor MOBIEL */
@@ -141,31 +129,6 @@
                 src: local("fonts/Futura-Bold-font.ttf");
             }
 
-            #cursor-circle {
-                position: fixed;
-                width: 20px;
-                height: 20px;
-                background-color: #ADADAD;
-                border-radius: 50%;
-                pointer-events: none;
-                transform: translate(-50%, -50%);
-                z-index: 9999;
-                transition: width 0.3s ease, height 0.3s ease, border-radius 0.3s ease, transform 0.3s ease;
-                animation: pulse 1.5s infinite ease-in-out;
-            }
-
-            #cursor-circle.text-select {
-                width: 3px;
-                height: 30px;
-                border-radius: 10px;
-                background-color: #ADADAD;
-                animation: stretch-and-spin 0.3s ease forwards, pulse-line 1.5s infinite ease-in-out;
-            }
-
-            .tab-header, .menu-items a, #titel {
-                cursor: text;
-            }
-
             body {
                 margin: 0;
                 display: flex;
@@ -180,11 +143,10 @@
                 height: 200vh;
                 perspective: 1500px;
                 overflow-y: auto;
-                scroll-snap-type: y mandatory; /* Veranderd naar mandatory voor meer controle */
-                scroll-behavior: smooth; /* Vloeiend scrollen */
+                scroll-snap-type: y proximity;
                 scrollbar-width: none;
                 -ms-overflow-style: none;
-                padding-top: 0; /* Verwijder padding-top om de container2 direct bovenaan te plaatsen */
+                padding-top: 100px;
                 padding-bottom: 100px;
             }
 
@@ -196,13 +158,13 @@
                 width: 80%;
                 max-width: 400px;
                 height: 200px;
-                margin: 50px auto; /* Aangepaste marge voor soepelere overgang */
+                margin: -100px auto;
                 background: #fff;
                 border-radius: 10px;
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
                 transform: rotateX(-40deg);
                 transition: transform 0.5s ease, opacity 0.5s ease;
-                scroll-snap-align: center; /* Tabs blijven snap-punten */
+                scroll-snap-align: center;
                 position: relative;
             }
 
@@ -212,12 +174,10 @@
 
             .container2 {
                 height: 100vh;
-                background: #F0F0F0;
-                scroll-snap-align: start; /* Maak container2 een snap-punt */
+                background: #333;
             }
 
             .tab-header {
-                cursor: text;
                 background: #f5f5f5;
                 padding: 10px;
                 color: black;
@@ -226,6 +186,7 @@
                 font-family: "futura";
                 font-weight: bold;
                 border-bottom: 1px solid #ddd;
+                cursor: text; /* Maak de tab-header selecteerbaar */
             }
 
             .tab-content {
@@ -276,7 +237,7 @@
                 top: 20px;
                 right: 20px;
                 width: 30px;
-                height: 20px;
+                height: 30px;
                 cursor: pointer;
                 z-index: 1001;
                 display: flex;
@@ -286,38 +247,36 @@
             }
 
             .line {
-                width: 8px;
-                height: 25px;
+                width: 10px;
+                height: 3px;
                 background-color: black;
                 transition: all 0.3s ease;
                 position: absolute;
             }
 
             .line1 {
-                transform: rotate(-45deg) translate(-11px, 7px);
+                transform: rotate(-45deg) translate(-5px, -5px);
                 transform-origin: center;
             }
 
             .line3 {
-                transform: rotate(45deg) translate(-2px, 2px);
+                transform: rotate(45deg) translate(-5px, 5px);
                 transform-origin: center;
             }
 
             .hamburger-checkbox:checked + .hamburger-label .line1 {
-                transform: rotate(-45deg) translate(-10px, -8px);
+                transform: rotate(45deg) translate(-5px, 5px);
                 transform-origin: left;
-                width: 8px;
-                height: 20px;
-                margin-left: 4.5px;
-                margin-top: 6px;
+                width: 10px;
+                height: 3px;
                 background-color: black;
             }
 
             .hamburger-checkbox:checked + .hamburger-label .line3 {
-                transform: rotate(45deg) translate(2px, -2px);
+                transform: rotate(-45deg) translate(-5px, -5px);
                 transform-origin: left;
-                width: 8px;
-                height: 25px;
+                width: 10px;
+                height: 3px;
                 background-color: black;
             }
 
@@ -346,12 +305,12 @@
                 margin: 40px 0;
             }
             .menu-items a {
-                cursor: text;
                 text-decoration: none;
                 color: #333;
                 font-size: 28px;
                 font-weight: bold;
                 transition: color 0.3s ease;
+                cursor: text; /* Maak de menu-items selecteerbaar */
             }
 
             .menu-items a:hover {
@@ -404,3 +363,173 @@
 
             /* DESKTOP code binnen deze accolades van het @media stuk */
         }
+    </style>
+</head>
+
+<body>   
+    <div id="titel">Portfolio</div>
+    <div id="cursor-circle"></div>
+
+    <div id="containerhamburger">
+        <nav class="navbar">
+            <input type="checkbox" class="hamburger-checkbox" id="hamburger-checkbox">
+            <label for="hamburger-checkbox" class="hamburger-label">
+                <span class="line line1"></span>
+                <span class="line line3"></span>
+            </label>
+            <ul class="menu-items">
+                <li><a href="Landing.html">Portfolio</a></li>
+                <div class="thinline"></div>
+                <li><a href="aboutus.html">About Us</a></li>
+                <div class="thinline"></div>
+                <li><a href="contact.html">Contact</a></li>
+                <div class="social-icons">
+                    <img src="icons/insta.png" alt="instagram">
+                    <img src="icons/x.webp" alt="X">
+                </div>
+            </ul>
+        </nav>
+    </div> 
+
+    <div class="tab-container">
+        <div class="container2"></div>
+        <a href="comic.html">
+            <div class="tab" style="z-index:1;">
+                <div class="tab-header">Comic</div>
+                <div class="tab-content">
+                    <img class="images" src="display/comic.png" alt="Comic pagina">
+                </div>
+            </div>
+        </a>
+        <a href="comic.html">
+            <div class="tab" style="z-index:2;">
+                <div class="tab-header">Parody LP</div>
+                <div class="tab-content">
+                    <img class="images" src="display/cover.png" alt="Comic pagina">
+                </div>
+            </div>
+        </a>
+        <a href="comic.html">
+            <div class="tab" style="z-index:3;">
+                <div class="tab-header">Live Photography</div>
+                <div class="tab-content">
+                    <img class="images" src="display/photos.png" alt="Comic pagina">
+                </div>
+            </div>
+        </a>
+        <a href="#">
+            <div class="tab" style="z-index:4;">
+                <div class="tab-header">Placeholder</div>
+                <div class="tab-content">
+                    <img class="images" src="display/placeholder.png" alt="Comic pagina">
+                </div>
+            </div>
+        </a>
+        <a href="#">
+            <div class="tab" style="z-index:4;">
+                <div class="tab-header">Placeholder</div>
+                <div class="tab-content">
+                    <img class="images" src="display/placeholder.png" alt="Comic pagina">
+                </div>
+            </div>
+        </a>
+        <a href="#">
+            <div class="tab" style="z-index:4;">
+                <div class="tab-header">Placeholder</div>
+                <div class="tab-content">
+                    <img class="images" src="display/placeholder.png" alt="Comic pagina">
+                </div>
+            </div>
+        </a>
+        <a href="#">
+            <div class="tab" style="z-index:4;">
+                <div class="tab-header">Placeholder</div>
+                <div class="tab-content">
+                    <img class="images" src="display/placeholder.png" alt="Comic pagina">
+                </div>
+            </div>
+        </a>
+        <div class="extraplace"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.tab-container');
+            const tabs = document.querySelectorAll('.tab');
+
+            container.addEventListener('scroll', () => {
+                const scrollTop = container.scrollTop;
+                const containerHeight = container.clientHeight;
+
+                let closestTab = null;
+                let minDistanceFromCenter = Infinity;
+                let closestTabIndex = -1;
+
+                tabs.forEach((tab, index) => {
+                    const tabTop = tab.offsetTop - scrollTop;
+                    const tabCenter = tabTop + tab.clientHeight / 2;
+                    const screenCenter = containerHeight / 2;
+                    const distanceFromCenter = Math.abs(tabCenter - screenCenter);
+
+                    if (distanceFromCenter < minDistanceFromCenter) {
+                        minDistanceFromCenter = distanceFromCenter;
+                        closestTab = tab;
+                        closestTabIndex = index;
+                    }
+                });
+
+                tabs.forEach((tab, index) => {
+                    const tabTop = tab.offsetTop - scrollTop;
+                    const tabCenter = tabTop + tab.clientHeight / 2;
+                    const screenCenter = containerHeight / 2;
+                    const distanceFromCenter = Math.abs(tabCenter - screenCenter);
+
+                    const scale = Math.max(1, 1 - distanceFromCenter / containerHeight);
+                    const opacity = Math.max(1, 1 - distanceFromCenter / containerHeight);
+
+                    tab.classList.remove('tab--centered');
+
+                    const isAbove = index < closestTabIndex;
+                    const isBelow = index > closestTabIndex;
+
+                    if (tab === closestTab) {
+                        tab.classList.add('tab--centered');
+                        tab.style.transform = `rotateX(0deg) scale(${scale}) translateY(150px)`;
+                    } else {
+                        let translateYValue = 0;
+                        if (isAbove) {
+                            translateYValue = -150;
+                        } else if (isBelow) {
+                            translateYValue = 300;
+                        }
+                        tab.style.transform = `rotateX(-40deg) scale(${scale}) translateY(${translateYValue}px)`;
+                    }
+
+                    tab.style.opacity = opacity;
+                });
+            });
+
+            container.scrollTop = 0;
+        });
+
+        // Cursor circle
+        const circle = document.getElementById('cursor-circle');
+        document.addEventListener('mousemove', (e) => {
+            circle.style.left = e.clientX + 'px';
+            circle.style.top = e.clientY + 'px';
+
+            // Controleer het element waar de muis overheen gaat
+            const target = e.target;
+            const computedStyle = window.getComputedStyle(target);
+            const cursorStyle = computedStyle.cursor;
+
+            // Als de cursor in tekstselectie-modus is (cursor: text), verander de vorm naar een lijn
+            if (cursorStyle === 'text') {
+                circle.classList.add('text-select');
+            } else {
+                circle.classList.remove('text-select');
+            }
+        });
+    </script>
+</body>
+</html>
