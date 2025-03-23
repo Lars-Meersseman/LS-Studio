@@ -213,7 +213,7 @@
             .container2 {
                 height: 100vh;
                 background: #F0F0F0;
-                scroll-snap-align: start; /* Maak container2 een snap-punt */
+                scroll-snap-align: start;
             }
 
             .tab-header {
@@ -379,7 +379,7 @@
                 font-family: "futura";
                 position: absolute;
                 top: 20px;
-                margin-left: 25vw;
+                margin-left: 22vw;
                 margin-top: 5vh;
                 z-index: 1;
                 color: #333;
