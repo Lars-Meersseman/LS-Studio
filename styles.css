@@ -176,15 +176,17 @@
             }
 
             .tab-container {
+				z-index:50;
                 width: 100%;
                 height: 200vh;
+				margin-top:-30vh;
                 perspective: 1500px;
                 overflow-y: auto;
-                scroll-snap-type: y mandatory; /* Veranderd naar mandatory voor meer controle */
-                scroll-behavior: smooth; /* Vloeiend scrollen */
+                scroll-snap-type: y mandatory;
+                scroll-behavior: smooth;
                 scrollbar-width: none;
                 -ms-overflow-style: none;
-                padding-top: 0; /* Verwijder padding-top om de container2 direct bovenaan te plaatsen */
+                padding-top: 0;
                 padding-bottom: 100px;
             }
 
@@ -196,13 +198,13 @@
                 width: 80%;
                 max-width: 400px;
                 height: 200px;
-                margin: 50px auto; /* Aangepaste marge voor soepelere overgang */
+                margin: 50px auto;
                 background: #fff;
                 border-radius: 10px;
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
                 transform: rotateX(-40deg);
                 transition: transform 0.5s ease, opacity 0.5s ease;
-                scroll-snap-align: center; /* Tabs blijven snap-punten */
+                scroll-snap-align: center;
                 position: relative;
             }
 
@@ -212,7 +214,7 @@
 
             .container2 {
                 height: 100vh;
-                background: #F0F0F0;
+                background-image: linear-gradient(#F0F0F0, #333);
                 scroll-snap-align: start;
             }
 
@@ -378,8 +380,8 @@
                 font-size: 15vh;
                 font-family: "futura";
                 position: absolute;
-                top: 20px;
-                margin-left: 22vw;
+                top: 0px;
+                margin-left:35vw;
                 margin-top: 5vh;
                 z-index: 1;
                 color: #333;

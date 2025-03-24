@@ -8,3 +8,19 @@
 <body>
 </body>
 </html>
+.intro-section {
+                position: fixed; /* Zorgt ervoor dat het blauwe scherm over de hele pagina ligt */
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: #1e90ff; /* Blauw scherm */
+                z-index: 10000; /* Zorgt ervoor dat het boven alles ligt */
+                opacity: 1; /* Start volledig zichtbaar */
+                transition: opacity 1s ease; /* Fade-out overgang */
+            }
+
+            .intro-section--hidden {
+                opacity: 0; /* Fade-out na 5 seconden */
+                display: none; /* Verberg volledig na de fade-out */
+            }

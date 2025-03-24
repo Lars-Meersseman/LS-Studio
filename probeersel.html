@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>LS-studio</title>
+
     <style>
-      @charset "UTF-8";
+  @charset "UTF-8";
         /* http://meyerweb.com/eric/tools/css/reset/ 
            v2.0 | 20110126
            License: none (public domain)
@@ -20,7 +21,413 @@
         fieldset, form, label, legend,
         table, caption, tbody, tfoot, thead, tr, th, td,
         article, aside, canvas, details, embed, 
-        figure, figcaption, footer, hgroup, 
+        figure, figcaption, footer, header, hgroup, 
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+        /* HTML5 display-role reset for older browsers */
+        article, aside, details, figcaption, figure, 
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+        body {
+            background-color: #F0F0F0;
+            line-height: 1;
+            margin: 0;
+            height: 300vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        ol, ul {
+            list-style: none;
+        }
+        blockquote, q {
+            quotes: none;
+        }
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content: '';
+            content: none;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        /* EINDE CSS RESET */
+        /* BEGIN RESPONSIVE OPZET */
+        * {
+            box-sizing: border-box;
+        }
+        .row:after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        [class*="col-"] {
+            float: left;
+            width: 100%;
+            /* Ter demonstratie hebben kolommen een border, doe maar weg voor je eigen werk */
+            border: solid 1px grey;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+
+        @keyframes pulse-line {
+            0%, 100% {
+                transform: translate(-50%, -50%) scaleY(1);
+            }
+            50% {
+                transform: translate(-50%, -50%) scaleY(1.1);
+            }
+        }
+        @keyframes stretch-and-spin {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+            }
+            50% {
+                transform: translate(-50%, -50%) rotate(90deg);
+                width: 2px;
+                height: 15px;
+                border-radius: 0;
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(0deg);
+                width: 2px;
+                height: 30px;
+                border-radius: 0;
+            }
+        }
+
+        /* Voor MOBIEL */
+        @media only screen and (max-width: 600px) {
+            .col-m-1 {width: 8.33%;}
+            .col-m-2 {width: 16.66%;}
+            .col-m-3 {width: 25%;}
+            .col-m-4 {width: 33.33%;}
+            .col-m-5 {width: 41.66%;}
+            .col-m-6 {width: 50%;}
+            .col-m-7 {width: 58.33%;}
+            .col-m-8 {width: 66.66%;}
+            .col-m-9 {width: 75%;}
+            .col-m-10 {width: 83.33%;}
+            .col-m-11 {width: 91.66%;}
+            .col-m-12 {width: 100%;}
+
+            /* MOBIELE code binnen deze accolades van het @media stuk */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: "Poppins", sans-serif;
+            }
+
+            @font-face {
+                font-family: Futura;
+                src: local("fonts/Futura-Bold-font.ttf");
+            }
+
+            #cursor-circle {
+                position: fixed;
+                width: 20px;
+                height: 20px;
+                background-color: #ADADAD;
+                border-radius: 50%;
+                pointer-events: none;
+                transform: translate(-50%, -50%);
+                z-index: 9999;
+                transition: width 0.3s ease, height 0.3s ease, border-radius 0.3s ease, transform 0.3s ease;
+                animation: pulse 1.5s infinite ease-in-out;
+            }
+
+            #cursor-circle.text-select {
+                width: 3px;
+                height: 30px;
+                border-radius: 10px;
+                background-color: #ADADAD;
+                animation: stretch-and-spin 0.3s ease forwards, pulse-line 1.5s infinite ease-in-out;
+            }
+
+            .tab-header, .menu-items a, #titel {
+                cursor: text;
+            }
+
+            body {
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: #F0F0F0;
+                overflow-x: hidden;
+            }
+
+            .tab-container {
+				z-index:50;
+                width: 100%;
+                height: 200vh;
+				margin-top:-50vh;
+                perspective: 1500px;
+                overflow-y: auto;
+                scroll-snap-type: y mandatory;
+                scroll-behavior: smooth;
+                scrollbar-width: none;
+                padding-top: 0;
+                padding-bottom: 100px;
+            }
+
+            .tab-container::-webkit-scrollbar {
+                display: none;
+            }
+
+            .tab {
+                width: 80%;
+                max-width: 400px;
+                height: 200px;
+                margin: 50px auto;
+                background: #fff;
+                border-radius: 10px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+                transform: rotateX(-40deg);
+                transition: transform 0.5s ease, opacity 0.5s ease;
+                scroll-snap-align: center;
+                position: relative;
+            }
+
+            .tab--centered {
+                z-index: 10;
+            }
+
+            .container2 {
+                height: 100vh;
+                background-image: linear-gradient(#F0F0F0, #333);
+                scroll-snap-align: start;
+            }
+
+            .tab-header {
+                cursor: text;
+                background: #f5f5f5;
+                padding: 10px;
+                color: black;
+                text-decoration: none;
+                text-align: center;
+                font-family: "futura";
+                font-weight: bold;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .tab-content {
+                padding: 20px;
+            }
+
+            .tab::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), transparent);
+                pointer-events: none;
+            }
+
+            .images {
+                border-top-left-radius: 0px;
+                border-top-right-radius: 0px;
+                border-bottom-right-radius: 10px;
+                border-bottom-left-radius: 10px;
+                width: 69.8vw;
+                margin-top: -3vh;
+                margin-left: -3.5vw;
+            }
+
+            .extraplace {
+                height: 10vh;
+                width: 1vw;
+                margin-top: 300vh;
+            }
+
+            .navbar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                z-index: 1000;
+            }
+
+            .hamburger-checkbox {
+                display: none;
+            }
+
+            .hamburger-label {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                width: 30px;
+                height: 20px;
+                cursor: pointer;
+                z-index: 1001;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .line {
+                width: 8px;
+                height: 25px;
+                background-color: black;
+                transition: all 0.3s ease;
+                position: absolute;
+            }
+
+            .line1 {
+                transform: rotate(-45deg) translate(-11px, 7px);
+                transform-origin: center;
+            }
+
+            .line3 {
+                transform: rotate(45deg) translate(-2px, 2px);
+                transform-origin: center;
+            }
+
+            .hamburger-checkbox:checked + .hamburger-label .line1 {
+                transform: rotate(-45deg) translate(-10px, -8px);
+                transform-origin: left;
+                width: 8px;
+                height: 20px;
+                margin-left: 4.5px;
+                margin-top: 6px;
+                background-color: black;
+            }
+
+            .hamburger-checkbox:checked + .hamburger-label .line3 {
+                transform: rotate(45deg) translate(2px, -2px);
+                transform-origin: left;
+                width: 8px;
+                height: 25px;
+                background-color: black;
+            }
+
+            .menu-items {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: #F0F0F0;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transform: translateY(-100%);
+                transition: transform 0.5s ease;
+                z-index: 1000;
+            }
+
+            .hamburger-checkbox:checked ~ .menu-items {
+                transform: translateY(0);
+            }
+
+            .menu-items li {
+                list-style: none;
+                margin: 40px 0;
+            }
+            .menu-items a {
+                cursor: text;
+                text-decoration: none;
+                color: #333;
+                font-size: 28px;
+                font-weight: bold;
+                transition: color 0.3s ease;
+            }
+
+            .menu-items a:hover {
+                color: #666;
+            }
+            .thinline {
+                width: 50vw;
+                height: 1px;
+                background-color: #838383;
+            }
+            .social-icons {
+                position: absolute;
+                width: 15px;
+                height: 40px;
+                margin-top: 80vh;
+                margin-left: -25vw;
+                display: flex;
+                gap: 100px;
+            }
+            .containerhamburger {
+                margin-top: 50vh;
+            }
+            #titel {
+                font-size: 15vh;
+                font-family: "futura";
+                position: absolute;
+                top: 0px;
+                margin-left:35vw;
+                margin-top: 5vh;
+                z-index: 1;
+                color: #333;
+                cursor: text;
+            }
+        }
+
+        /* Voor DESKTOP */
+        @media only screen and (min-width: 601px) {
+            .col-1 {width: 8.33%;}
+            .col-2 {width: 16.66%;}
+            .col-3 {width: 25%;}
+            .col-4 {width: 33.33%;}
+            .col-5 {width: 41.66%;}
+            .col-6 {width: 50%;}
+            .col-7 {width: 58.33%;}
+            .col-8 {width: 66.66%;}
+            .col-9 {width: 75%;}
+            .col-10 {width: 83.33%;}
+            .col-11 {width: 91.66%;}
+            .col-12 {width: 100%;}
+
+            /* DESKTOP code binnen deze accolades van het @media stuk */
+        }  @charset "UTF-8";
+        /* http://meyerweb.com/eric/tools/css/reset/ 
+           v2.0 | 20110126
+           License: none (public domain)
+        */
+
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed, 
+        figure, figcaption, footer, header, hgroup, 
         menu, nav, output, ruby, section, summary,
         time, mark, audio, video {
             margin: 0;
@@ -157,20 +564,20 @@
             }
 
             .intro-section {
-                position: fixed; /* Zorgt ervoor dat het blauwe scherm over de hele pagina ligt */
+                position: fixed;
                 top: 0;
                 left: 0;
                 width: 100%;
                 height: 100vh;
                 background: #1e90ff; /* Blauw scherm */
-                z-index: 10000; /* Zorgt ervoor dat het boven alles ligt */
-                opacity: 1; /* Start volledig zichtbaar */
-                transition: opacity 1s ease; /* Fade-out overgang */
+                z-index: 10000;
+                opacity: 1; 
+                transition: opacity 1s ease;
             }
 
             .intro-section--hidden {
-                opacity: 0; /* Fade-out na 5 seconden */
-                display: none; /* Verberg volledig na de fade-out */
+                opacity: 0;
+                display: none;
             }
 
             #cursor-circle {
@@ -208,15 +615,17 @@
             }
 
             .tab-container {
+                z-index: 50;
                 width: 100%;
                 height: 200vh;
+                margin-top: -30vh;
                 perspective: 1500px;
                 overflow-y: auto;
-                scroll-snap-type: y mandatory; /* Veranderd naar mandatory voor meer controle */
-                scroll-behavior: smooth; /* Vloeiend scrollen */
+                scroll-snap-type: y mandatory;
+                scroll-behavior: smooth;
                 scrollbar-width: none;
                 -ms-overflow-style: none;
-                padding-top: 0; /* Verwijder padding-top om de container2 direct bovenaan te plaatsen */
+                padding-top: 0;
                 padding-bottom: 100px;
                 background: transparent; /* Transparant om body achtergrond te tonen */
             }
@@ -229,13 +638,13 @@
                 width: 80%;
                 max-width: 400px;
                 height: 200px;
-                margin: 50px auto; /* Aangepaste marge voor soepelere overgang */
+                margin: 50px auto;
                 background: #fff;
                 border-radius: 10px;
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
                 transform: rotateX(-40deg);
                 transition: transform 0.5s ease, opacity 0.5s ease;
-                scroll-snap-align: center; /* Tabs blijven snap-punten */
+                scroll-snap-align: center;
                 position: relative;
                 opacity: 0; /* Verberg tabs in het begin */
                 transition: opacity 0.5s ease;
@@ -251,8 +660,8 @@
 
             .container2 {
                 height: 100vh;
-                background: transparent; /* Maak container2 transparant */
-                scroll-snap-align: start; /* Maak container2 een snap-punt */
+                background-image: linear-gradient(#F0F0F0, #333);
+                scroll-snap-align: start;
             }
 
             .tab-header {
@@ -423,16 +832,15 @@
                 font-size: 15vh;
                 font-family: "futura";
                 position: fixed; /* Gebruik fixed om de titel altijd op dezelfde plek te houden */
-                top: 20px;
-                left: 50%; /* Centreer horizontaal */
-                transform: translateX(-50%); /* Corrigeer voor centreren */
-                margin-left: 0; /* Verwijder margin-left om te centreren */
+                top: 0px;
+                left: 0;
+                margin-left: -5vw;
                 margin-top: 5vh;
                 z-index: 1;
                 color: #333;
                 cursor: text;
                 opacity: 0; /* Verberg titel in het begin */
-                transition: opacity 0.5s ease;
+                transition: opacity 0.5s ease, transform 0.3s ease; /* Voeg transform transition toe */
             }
 
             #titel.titel--visible {
@@ -461,9 +869,16 @@
 </head>
 
 <body>   
-    <div id="titel">Portfolio</div>
+    <div id="titel">We are <br>LS-Studio</div>
     <div id="cursor-circle"></div>
-    <div class="intro-section"></div>
+    <div class="intro-section">
+		<div class="video">
+		<video autoplay width="575" style="margin-top:25vh;" >
+		  <source src="animatie.mp4" type="video/mp4">
+		  Your browser does not support the animation :/
+		</video>
+		</div>
+	</div>
     <div id="containerhamburger">
         <nav class="navbar">
             <input type="checkbox" class="hamburger-checkbox" id="hamburger-checkbox">
@@ -570,11 +985,43 @@
                 tabs.forEach(tab => tab.classList.add('tab--visible'));
             }, 5000);
 
-            // Bestaande logica voor tab centering
+            // Bestaande logica voor tab centering en dynamische titelpositie
             container.addEventListener('scroll', () => {
                 const scrollTop = container.scrollTop;
                 const containerHeight = container.clientHeight;
 
+                // Vind de bovenste tab die momenteel in beeld is
+                let topmostTab = null;
+                let minTop = Infinity;
+
+                tabs.forEach(tab => {
+                    const tabTop = tab.offsetTop - scrollTop;
+                    if (tabTop < minTop && tabTop > -tab.clientHeight) {
+                        minTop = tabTop;
+                        topmostTab = tab;
+                    }
+                });
+
+                // Pas de positie van de titel aan
+                if (topmostTab) {
+                    const titleHeight = title.offsetHeight; // Hoogte van de titel
+                    const tabTop = topmostTab.offsetTop - scrollTop; // Positie van de bovenste tab
+                    const titleBottom = titleHeight + 5 * window.innerHeight / 100; // Onderkant van de titel (inclusief margin-top: 5vh)
+
+                    // Als de bovenste tab de onderkant van de titel nadert, duw de titel omhoog
+                    if (tabTop < titleBottom + 20) { // 20px buffer voor soepele overgang
+                        const pushUpDistance = titleBottom - tabTop + 20; // Hoeveel de titel omhoog moet
+                        title.style.transform = `translateY(-${pushUpDistance}px)`;
+                    } else {
+                        // Als er geen overlap is, zet de titel terug naar de oorspronkelijke positie
+                        title.style.transform = 'translateY(0)';
+                    }
+                } else {
+                    // Als er geen tabs in beeld zijn, zet de titel terug
+                    title.style.transform = 'translateY(0)';
+                }
+
+                // Bestaande logica voor tab centering
                 let closestTab = null;
                 let minDistanceFromCenter = Infinity;
                 let closestTabIndex = -1;

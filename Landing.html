@@ -5,7 +5,7 @@
     <title>LS-studio</title>
     <link href="styles.css" rel="stylesheet" type="text/css">
     <style>
-      @charset "UTF-8";
+    @charset "UTF-8";
         /* http://meyerweb.com/eric/tools/css/reset/ 
            v2.0 | 20110126
            License: none (public domain)
@@ -116,14 +116,7 @@
                 border-radius: 0;
             }
         }
-		@keyframes fadeOut {
-            0% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-            }
-        }
+
         /* Voor MOBIEL */
         @media only screen and (max-width: 600px) {
             .col-m-1 {width: 8.33%;}
@@ -154,22 +147,7 @@
                 font-family: Futura;
                 src: local("fonts/Futura-Bold-font.ttf");
             }
- .intro-section {
-                position: fixed; /* Zorgt ervoor dat het blauwe scherm over de hele pagina ligt */
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100vh;
-                background: #1e90ff; /* Blauw scherm */
-                z-index: 10000; /* Zorgt ervoor dat het boven alles ligt */
-                opacity: 1; /* Start volledig zichtbaar */
-                transition: opacity 1s ease; /* Fade-out overgang */
-            }
 
-            .intro-section--hidden {
-                opacity: 0; /* Fade-out na 5 seconden */
-                display: none; /* Verberg volledig na de fade-out */
-            }
             #cursor-circle {
                 position: fixed;
                 width: 20px;
@@ -205,15 +183,17 @@
             }
 
             .tab-container {
+				z-index:50;
                 width: 100%;
                 height: 200vh;
+				margin-top:-30vh;
                 perspective: 1500px;
                 overflow-y: auto;
-                scroll-snap-type: y mandatory; /* Veranderd naar mandatory voor meer controle */
-                scroll-behavior: smooth; /* Vloeiend scrollen */
+                scroll-snap-type: y mandatory;
+                scroll-behavior: smooth;
                 scrollbar-width: none;
                 -ms-overflow-style: none;
-                padding-top: 0; /* Verwijder padding-top om de container2 direct bovenaan te plaatsen */
+                padding-top: 0;
                 padding-bottom: 100px;
             }
 
@@ -225,13 +205,13 @@
                 width: 80%;
                 max-width: 400px;
                 height: 200px;
-                margin: 50px auto; /* Aangepaste marge voor soepelere overgang */
+                margin: 50px auto;
                 background: #fff;
                 border-radius: 10px;
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
                 transform: rotateX(-40deg);
                 transition: transform 0.5s ease, opacity 0.5s ease;
-                scroll-snap-align: center; /* Tabs blijven snap-punten */
+                scroll-snap-align: center;
                 position: relative;
             }
 
@@ -241,8 +221,8 @@
 
             .container2 {
                 height: 100vh;
-                background: #F0F0F0;
-                scroll-snap-align: start; /* Maak container2 een snap-punt */
+                background:#F0F0F0;
+                scroll-snap-align: start;
             }
 
             .tab-header {
@@ -407,8 +387,8 @@
                 font-size: 15vh;
                 font-family: "futura";
                 position: absolute;
-                top: 20px;
-                margin-left: 22vw;
+                top: 0px;
+                margin-left:-5vw;
                 margin-top: 5vh;
                 z-index: 1;
                 color: #333;
@@ -437,9 +417,8 @@
 </head>
 
 <body>   
-    <div id="titel">Portfolio</div>
+    <div id="titel">We are <br>LS-Studio</div>
     <div id="cursor-circle"></div>
-<div class="intro-section"></div>
     <div id="containerhamburger">
         <nav class="navbar">
             <input type="checkbox" class="hamburger-checkbox" id="hamburger-checkbox">
@@ -523,27 +502,6 @@
     </div>
 
     <script>
-		 document.addEventListener('DOMContentLoaded', () => {
-            const container = document.querySelector('.tab-container');
-            const tabs = document.querySelectorAll('.tab');
-            const introSection = document.querySelector('.intro-section');
-            const title = document.querySelector('#titel');
-            const navbar = document.querySelector('.navbar');
-            const cursorCircle = document.querySelector('#cursor-circle');
-        // Fade-out van de intro-section na 5 seconden en toon de inhoud
-            setTimeout(() => {
-                // Start de fade-out van de intro-section
-                introSection.classList.add('intro-section--hidden');
-
-                // Herstel de originele achtergrondkleur
-                document.body.style.backgroundColor = '#F0F0F0';
-
-                // Maak andere elementen zichtbaar
-                title.classList.add('titel--visible');
-                navbar.classList.add('navbar--visible');
-                cursorCircle.style.display = 'block';
-                tabs.forEach(tab => tab.classList.add('tab--visible'));
-            }, 5000);
 		document.addEventListener('DOMContentLoaded', () => {
             const container = document.querySelector('.tab-container');
             const tabs = document.querySelectorAll('.tab');
