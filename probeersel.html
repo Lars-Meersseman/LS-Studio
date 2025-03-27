@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>LS-studio</title>
-
     <style>
-  @charset "UTF-8";
+    @charset "UTF-8";
         /* http://meyerweb.com/eric/tools/css/reset/ 
            v2.0 | 20110126
            License: none (public domain)
@@ -40,7 +39,7 @@
             background-color: #F0F0F0;
             line-height: 1;
             margin: 0;
-            height: 400vh; /* Verhoogd van 300vh naar 400vh om meer scrollruimte te bieden */
+            height: 300vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -164,7 +163,7 @@
             #cursor-circle.text-select {
                 width: 3px;
                 height: 30px;
-                border-radius: 10px;
+                border-radius: 90px;
                 background-color: #ADADAD;
                 animation: stretch-and-spin 0.3s ease forwards, pulse-line 1.5s infinite ease-in-out;
             }
@@ -185,21 +184,15 @@
             .tab-container {
                 z-index: 0;
                 width: 100%;
-                height: 300vh;
+                height: 200vh;
                 margin-top: -100vh;
                 perspective: 1500px;
                 overflow-y: auto;
-                scroll-snap-type: y mandatory;
+                scroll-snap-type: y proximity;
                 scroll-behavior: smooth;
                 scrollbar-width: none;
                 padding-top: 0;
                 padding-bottom: 100px;
-                transform: translateY(100vh); /* Startpositie: buiten het zicht onderaan */
-                transition: transform 1.2s cubic-bezier(0.25, 0.1, 0.25, 1); /* Synchrone animatie met intro-section */
-            }
-
-            .tab-container--visible {
-                transform: translateY(0); /* Schuift omhoog naar de normale positie */
             }
 
             .tab-container::-webkit-scrollbar {
@@ -215,7 +208,7 @@
                 border-radius: 10px;
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
                 transform: rotateX(-40deg);
-                transition: transform 0.5s ease, opacity 0.5s ease;
+                transition: transform 0.8s ease, opacity 0.8s ease;
                 scroll-snap-align: center;
                 position: relative;
             }
@@ -268,9 +261,10 @@
             }
 
             .extraplace {
-                height: 100vh; /* Verhoogd van 10vh naar 100vh */
+                height: 100vh;
                 width: 1vw;
-                margin-top: 500vh;
+                margin-top: 300vh;
+                scroll-snap-align: end;
             }
 
             .navbar {
@@ -326,12 +320,12 @@
                 margin-top: 6px;
                 background-color: black;
             }
-			.containertitel{
-				width:100%;
-				height:20vh;
-				border:1px solid red;
-				position:absolute;
-			}
+            .containertitel {
+                width: 100%;
+                height: 20vh;
+                border: 1px solid red;
+                position: absolute;
+            }
             .hamburger-checkbox:checked + .hamburger-label .line3 {
                 transform: rotate(45deg) translate(10px, 23px);
                 transform-origin: left;
@@ -396,26 +390,27 @@
                 left: 0;
                 width: 100%;
                 height: 100vh;
-                background: #F0F0F0;
+                background: #1e90ff;
                 z-index: 10000;
-                transition: transform 1.2s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 1.2s ease-out;
+                opacity: 1; 
+                transition: opacity 1s ease;
             }
 
-            .intro-section		--hidden {
-                transform: translateY(-100vh); /* Schuift de intro-section naar boven */
+            .intro-section--hidden {
                 opacity: 0;
+                display: none;
             }
-			#titel {
-    font-family: "futura";
-    position: absolute;
-    top: 0px;
-    z-index: 1;
-    color: #333;
-    cursor: text;
-    font-size: 8vh; /* Verkleind van 15vh naar 8vh */
-    margin-left: -45vw; /* Bestaande marge behouden */
-    margin-top: 4vh; /* Bestaande marge behouden */
-}
+            #titel {
+                font-family: "futura";
+                position: absolute;
+                top: 0px;
+                z-index: 1;
+                color: #333;
+                cursor: text;
+                font-size: 8vh;
+                margin-left: -45vw;
+                margin-top: 4vh;
+            }   
         }
 
         /* Voor DESKTOP */
@@ -439,9 +434,16 @@
 </head>
 
 <body>   
-   <div id="titel">LS-Studio</div>
+    <div id="titel">LS-Studio</div>
     <div id="cursor-circle"></div>
-	
+    <div class="intro-section">
+        <div class="video">
+        <video autoplay muted width="575" style="margin-top:25vh;">
+          <source src="animatie.mp4" type="video/mp4">
+          Your browser does not support the animation :/
+        </video>
+        </div>
+    </div>
     <div id="containerhamburger">
         <nav class="navbar">
             <input type="checkbox" class="hamburger-checkbox" id="hamburger-checkbox">
@@ -462,6 +464,7 @@
             </ul>
         </nav>
     </div> 
+
     <div class="tab-container">
         <div class="container2"></div>
         <a href="comic.html">
@@ -511,7 +514,15 @@
                     <img class="images" src="display/placeholder.png" alt="Comic pagina">
                 </div>
             </div>
-        </a> 
+        </a>
+        <a href="#">
+            <div class="tab" style="z-index:4;">
+                <div class="tab-header">Placeholder</div>
+                <div class="tab-content">
+                    <img class="images" src="display/placeholder.png" alt="Comic pagina">
+                </div>
+            </div>
+        </a>
         <div class="extraplace"></div>
     </div>
 
@@ -525,13 +536,10 @@
             const cursorCircle = document.querySelector('#cursor-circle');
             const video = document.querySelector('video'); // Selecteer het video element
 
-            // Wacht tot de video is afgelopen om de intro-section te verbergen en de website te tonen
+            // Wacht tot de video is afgelopen om de intro-section te verbergen
             video.addEventListener('ended', () => {
-                // Start de slide-up van de intro-section
+                // Start de fade-out van de intro-section
                 introSection.classList.add('intro-section--hidden');
-
-                // Laat de tab-container mee omhoog schuiven
-                container.classList.add('tab-container--visible');
 
                 // Herstel de originele achtergrondkleur
                 document.body.style.backgroundColor = '#F0F0F0';
@@ -579,7 +587,7 @@
                     title.style.transform = 'translateY(0)';
                 }
 
-                // B10 logica voor tab centering
+                // Bestaande logica voor tab centering
                 let closestTab = null;
                 let minDistanceFromCenter = Infinity;
                 let closestTabIndex = -1;
@@ -633,9 +641,28 @@
 
         // Cursor circle
         const circle = document.getElementById('cursor-circle');
+
+        // Variabelen om de vorige positie en tijd bij te houden
+        let lastX = 0;
+        let lastY = 0;
+        let lastTime = 0;
+
         document.addEventListener('mousemove', (e) => {
-            circle.style.left = e.clientX + 'px';
-            circle.style.top = e.clientY + 'px';
+            // Huidige positie en tijd
+            const currentX = e.clientX;
+            const currentY = e.clientY;
+            const currentTime = performance.now();
+
+            // Bereken de snelheid en richting
+            const deltaX = currentX - lastX;
+            const deltaY = currentY - lastY;
+            const deltaTime = (currentTime - lastTime) / 1000;
+            const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+            const speed = distance / deltaTime;
+
+            // Update de positie van het bolletje
+            circle.style.left = currentX + 'px';
+            circle.style.top = currentY + 'px';
 
             // Controleer het element waar de muis overheen gaat
             const target = e.target;
@@ -647,7 +674,34 @@
                 circle.classList.add('text-select');
             } else {
                 circle.classList.remove('text-select');
+
+                // Bepaal de richting van de beweging
+                const absDeltaX = Math.abs(deltaX);
+                const absDeltaY = Math.abs(deltaY);
+                const totalDelta = absDeltaX + absDeltaY;
+
+                // Bereken de "richtingfactor" (0 = volledig verticaal, 1 = volledig horizontaal)
+                const horizontalFactor = totalDelta > 0 ? absDeltaX / totalDelta : 0.5;
+                const verticalFactor = totalDelta > 0 ? absDeltaY / totalDelta : 0.5;
+
+                // Pas de afmetingen aan op basis van snelheid en richting
+                const maxDimension = 30;
+                const minDimension = 5;
+                const maxSpeed = 2000;
+                const speedFactor = Math.min(speed / maxSpeed, 1);
+
+                const newWidth = maxDimension - (maxDimension - minDimension) * speedFactor * horizontalFactor;
+                const newHeight = maxDimension - (maxDimension - minDimension) * speedFactor * verticalFactor;
+
+                circle.style.width = `${newWidth}px`;
+                circle.style.height = `${newHeight}px`;
+                circle.style.borderRadius = '50%';
             }
+
+            // Update de vorige positie en tijd
+            lastX = currentX;
+            lastY = currentY;
+            lastTime = currentTime;
         });
     </script>
 </body>
