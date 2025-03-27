@@ -176,16 +176,15 @@
             }
 
             .tab-container {
-				z-index:50;
+				z-index:0;
                 width: 100%;
                 height: 200vh;
-				margin-top:-30vh;
+				margin-top:-100vh;
                 perspective: 1500px;
                 overflow-y: auto;
                 scroll-snap-type: y mandatory;
                 scroll-behavior: smooth;
                 scrollbar-width: none;
-                -ms-overflow-style: none;
                 padding-top: 0;
                 padding-bottom: 100px;
             }
@@ -214,7 +213,7 @@
 
             .container2 {
                 height: 100vh;
-                background-image: linear-gradient(#F0F0F0, #333);
+                background:#F0F0F0;
                 scroll-snap-align: start;
             }
 
@@ -287,7 +286,7 @@
                 align-items: center;
             }
 
-            .line {
+             .line {
                 width: 8px;
                 height: 25px;
                 background-color: black;
@@ -296,17 +295,17 @@
             }
 
             .line1 {
-                transform: rotate(-45deg) translate(-11px, 7px);
+                transform: rotate(-45deg) translate(-31px, 15px);
                 transform-origin: center;
             }
 
             .line3 {
-                transform: rotate(45deg) translate(-2px, 2px);
+                transform: rotate(45deg) translate(4px, 22.5px);
                 transform-origin: center;
             }
 
             .hamburger-checkbox:checked + .hamburger-label .line1 {
-                transform: rotate(-45deg) translate(-10px, -8px);
+                transform: rotate(-45deg) translate(-35.2px, -3px);
                 transform-origin: left;
                 width: 8px;
                 height: 20px;
@@ -314,9 +313,14 @@
                 margin-top: 6px;
                 background-color: black;
             }
-
+			.containertitel{
+				width:100%;
+				height:20vh;
+				border:1px solid red;
+				position:absolute;
+			}
             .hamburger-checkbox:checked + .hamburger-label .line3 {
-                transform: rotate(45deg) translate(2px, -2px);
+                transform: rotate(45deg) translate(10px, 23px);
                 transform-origin: left;
                 width: 8px;
                 height: 25px;
@@ -372,21 +376,34 @@
                 margin-left: -25vw;
                 display: flex;
                 gap: 100px;
+            } 
+			.intro-section {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: #1e90ff;
+                z-index: 10000;
+                opacity: 1; 
+                transition: opacity 1s ease;
             }
-            .containerhamburger {
-                margin-top: 50vh;
+
+            .intro-section--hidden {
+                opacity: 0;
+                display: none;
             }
             #titel {
-                font-size: 15vh;
-                font-family: "futura";
-                position: absolute;
-                top: 0px;
-                margin-left:35vw;
-                margin-top: 5vh;
-                z-index: 1;
-                color: #333;
-                cursor: text;
-            }
+    			font-family: "futura";
+   				 position: absolute;
+    			top: 0px;
+    			z-index: 1;
+    			color: #333;
+    			cursor: text;
+    			font-size: 8vh; /* Verkleind van 15vh naar 8vh */
+    			margin-left: -45vw; /* Bestaande marge behouden */
+    			margin-top: 4vh; /* Bestaande marge behouden */
+}	
         }
 
         /* Voor DESKTOP */

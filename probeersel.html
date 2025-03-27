@@ -40,7 +40,7 @@
             background-color: #F0F0F0;
             line-height: 1;
             margin: 0;
-            height: 300vh;
+            height: 400vh; /* Verhoogd van 300vh naar 400vh om meer scrollruimte te bieden */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -183,10 +183,10 @@
             }
 
             .tab-container {
-				z-index:0;
+                z-index: 0;
                 width: 100%;
-                height: 200vh;
-				margin-top:-50vh;
+                height: 300vh;
+                margin-top: -100vh;
                 perspective: 1500px;
                 overflow-y: auto;
                 scroll-snap-type: y mandatory;
@@ -194,6 +194,12 @@
                 scrollbar-width: none;
                 padding-top: 0;
                 padding-bottom: 100px;
+                transform: translateY(100vh); /* Startpositie: buiten het zicht onderaan */
+                transition: transform 1.2s cubic-bezier(0.25, 0.1, 0.25, 1); /* Synchrone animatie met intro-section */
+            }
+
+            .tab-container--visible {
+                transform: translateY(0); /* Schuift omhoog naar de normale positie */
             }
 
             .tab-container::-webkit-scrollbar {
@@ -220,7 +226,7 @@
 
             .container2 {
                 height: 100vh;
-                background-image: linear-gradient(#F0F0F0, #333);
+                background: #F0F0F0;
                 scroll-snap-align: start;
             }
 
@@ -262,9 +268,9 @@
             }
 
             .extraplace {
-                height: 10vh;
+                height: 100vh; /* Verhoogd van 10vh naar 100vh */
                 width: 1vw;
-                margin-top: 300vh;
+                margin-top: 500vh;
             }
 
             .navbar {
@@ -302,17 +308,17 @@
             }
 
             .line1 {
-                transform: rotate(-45deg) translate(-11px, 7px);
+                transform: rotate(-45deg) translate(-31px, 15px);
                 transform-origin: center;
             }
 
             .line3 {
-                transform: rotate(45deg) translate(-2px, 2px);
+                transform: rotate(45deg) translate(4px, 22.5px);
                 transform-origin: center;
             }
 
             .hamburger-checkbox:checked + .hamburger-label .line1 {
-                transform: rotate(-45deg) translate(-10px, -8px);
+                transform: rotate(-45deg) translate(-35.2px, -3px);
                 transform-origin: left;
                 width: 8px;
                 height: 20px;
@@ -320,9 +326,14 @@
                 margin-top: 6px;
                 background-color: black;
             }
-
+			.containertitel{
+				width:100%;
+				height:20vh;
+				border:1px solid red;
+				position:absolute;
+			}
             .hamburger-checkbox:checked + .hamburger-label .line3 {
-                transform: rotate(45deg) translate(2px, -2px);
+                transform: rotate(45deg) translate(10px, 23px);
                 transform-origin: left;
                 width: 8px;
                 height: 25px;
@@ -379,36 +390,32 @@
                 display: flex;
                 gap: 100px;
             } 
-			.intro-section {
+            .intro-section {
                 position: fixed;
                 top: 0;
                 left: 0;
                 width: 100%;
                 height: 100vh;
-                background: #1e90ff;
+                background: #F0F0F0;
                 z-index: 10000;
-                opacity: 1; 
-                transition: opacity 1s ease;
+                transition: transform 1.2s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 1.2s ease-out;
             }
 
-            .intro-section--hidden {
+            .intro-section		--hidden {
+                transform: translateY(-100vh); /* Schuift de intro-section naar boven */
                 opacity: 0;
-                display: none;
             }
-            .containerhamburger {
-                margin-top: 50vh;
-            }
-            #titel {
-                font-size: 15vh;
-                font-family: "futura";
-                position: absolute;
-                top: 0px;
-                margin-left:-5vw;
-                margin-top: 5vh;
-                z-index: 1;
-                color: #333;
-                cursor: text;
-            }
+			#titel {
+    font-family: "futura";
+    position: absolute;
+    top: 0px;
+    z-index: 1;
+    color: #333;
+    cursor: text;
+    font-size: 8vh; /* Verkleind van 15vh naar 8vh */
+    margin-left: -45vw; /* Bestaande marge behouden */
+    margin-top: 4vh; /* Bestaande marge behouden */
+}
         }
 
         /* Voor DESKTOP */
@@ -427,31 +434,14 @@
             .col-12 {width: 100%;}
 
             /* DESKTOP code binnen deze accolades van het @media stuk */
-        }  @charset "UTF-8";
-        /* http://meyerweb.com/eric/tools/css/reset/ 
-           v2.0 | 20110126
-           License: none (public domain)
-        */
-
-     
-
-           
-
-           
+        }
     </style>
 </head>
 
 <body>   
-    <div id="titel">We are <br>LS-Studio</div>
+   <div id="titel">LS-Studio</div>
     <div id="cursor-circle"></div>
-    <div class="intro-section">
-		<div class="video">
-		<video autoplay width="575" style="margin-top:25vh;" >
-		  <source src="animatie.mp4" type="video/mp4">
-		  Your browser does not support the animation :/
-		</video>
-		</div>
-	</div>
+	
     <div id="containerhamburger">
         <nav class="navbar">
             <input type="checkbox" class="hamburger-checkbox" id="hamburger-checkbox">
@@ -472,7 +462,6 @@
             </ul>
         </nav>
     </div> 
-
     <div class="tab-container">
         <div class="container2"></div>
         <a href="comic.html">
@@ -522,15 +511,7 @@
                     <img class="images" src="display/placeholder.png" alt="Comic pagina">
                 </div>
             </div>
-        </a>
-        <a href="#">
-            <div class="tab" style="z-index:4;">
-                <div class="tab-header">Placeholder</div>
-                <div class="tab-content">
-                    <img class="images" src="display/placeholder.png" alt="Comic pagina">
-                </div>
-            </div>
-        </a>
+        </a> 
         <div class="extraplace"></div>
     </div>
 
@@ -542,11 +523,15 @@
             const title = document.querySelector('#titel');
             const navbar = document.querySelector('.navbar');
             const cursorCircle = document.querySelector('#cursor-circle');
+            const video = document.querySelector('video'); // Selecteer het video element
 
-            // Fade-out van de intro-section na 5 seconden en toon de inhoud
-            setTimeout(() => {
-                // Start de fade-out van de intro-section
+            // Wacht tot de video is afgelopen om de intro-section te verbergen en de website te tonen
+            video.addEventListener('ended', () => {
+                // Start de slide-up van de intro-section
                 introSection.classList.add('intro-section--hidden');
+
+                // Laat de tab-container mee omhoog schuiven
+                container.classList.add('tab-container--visible');
 
                 // Herstel de originele achtergrondkleur
                 document.body.style.backgroundColor = '#F0F0F0';
@@ -556,7 +541,7 @@
                 navbar.classList.add('navbar--visible');
                 cursorCircle.style.display = 'block';
                 tabs.forEach(tab => tab.classList.add('tab--visible'));
-            }, 5000);
+            });
 
             // Bestaande logica voor tab centering en dynamische titelpositie
             container.addEventListener('scroll', () => {
@@ -579,7 +564,7 @@
                 if (topmostTab) {
                     const titleHeight = title.offsetHeight; // Hoogte van de titel
                     const tabTop = topmostTab.offsetTop - scrollTop; // Positie van de bovenste tab
-                    const titleBottom = titleHeight + 5 * window.innerHeight / 100; // Onderkant van de titel (inclusief margin-top: 5vh)
+                    const titleBottom = titleHeight + 20 * window.innerHeight / 100; // Onderkant van de titel (inclusief margin-top: 5vh)
 
                     // Als de bovenste tab de onderkant van de titel nadert, duw de titel omhoog
                     if (tabTop < titleBottom + 20) { // 20px buffer voor soepele overgang
@@ -594,7 +579,7 @@
                     title.style.transform = 'translateY(0)';
                 }
 
-                // Bestaande logica voor tab centering
+                // B10 logica voor tab centering
                 let closestTab = null;
                 let minDistanceFromCenter = Infinity;
                 let closestTabIndex = -1;
