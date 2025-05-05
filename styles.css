@@ -289,7 +289,7 @@
              .line {
                 width: 8px;
                 height: 25px;
-                background-color: black;
+                background-color: #333;
                 transition: all 0.3s ease;
                 position: absolute;
             }
@@ -311,7 +311,7 @@
                 height: 20px;
                 margin-left: 4.5px;
                 margin-top: 6px;
-                background-color: black;
+                background-color: #333;
             }
 			.containertitel{
 				width:100%;
@@ -324,7 +324,7 @@
                 transform-origin: left;
                 width: 8px;
                 height: 25px;
-                background-color: black;
+                background-color: #333;
             }
 
             .menu-items {
@@ -400,9 +400,9 @@
     			z-index: 1;
     			color: #333;
     			cursor: text;
-    			font-size: 8vh; /* Verkleind van 15vh naar 8vh */
-    			margin-left: -45vw; /* Bestaande marge behouden */
-    			margin-top: 4vh; /* Bestaande marge behouden */
+    			font-size: 6vh; /* Verkleind van 15vh naar 8vh */
+    			margin-left: 4vw; /* Bestaande marge behouden */
+    			margin-top: 3vh; /* Bestaande marge behouden */
 }	
         }
 
