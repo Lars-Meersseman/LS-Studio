@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>LS-studio</title>
+    <title>Probeersel</title>
     <style>
     @charset "UTF-8";
         /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -168,7 +168,7 @@
                 animation: stretch-and-spin 0.3s ease forwards, pulse-line 1.5s infinite ease-in-out;
             }
 
-            .tab-header, .menu-items a, #titel {
+            .tab-header, .menu-items a, #text1, #titel {
                 cursor: text;
             }
 
@@ -218,7 +218,7 @@
             }
 
             .container2 {
-                height: 100vh;
+                height: 50vh;
                 background: #F0F0F0;
                 scroll-snap-align: start;
             }
@@ -255,9 +255,9 @@
                 border-top-right-radius: 0px;
                 border-bottom-right-radius: 10px;
                 border-bottom-left-radius: 10px;
-                width: 69.8vw;
+                width: 80vw;
                 margin-top: -3vh;
-                margin-left: -3.5vw;
+                margin-left: -4vw;
             }
 
             .extraplace {
@@ -296,7 +296,7 @@
             .line {
                 width: 8px;
                 height: 25px;
-                background-color: black;
+                background-color: #333;
                 transition: all 0.3s ease;
                 position: absolute;
             }
@@ -307,7 +307,7 @@
             }
 
             .line3 {
-                transform: rotate(45deg) translate(4px, 22.5px);
+                transform: rotate(45deg) translate(6px, 21.5px);
                 transform-origin: center;
             }
 
@@ -318,7 +318,7 @@
                 height: 20px;
                 margin-left: 4.5px;
                 margin-top: 6px;
-                background-color: black;
+                background-color: #333;
             }
             .containertitel {
                 width: 100%;
@@ -331,7 +331,7 @@
                 transform-origin: left;
                 width: 8px;
                 height: 25px;
-                background-color: black;
+                background-color: #333;
             }
 
             .menu-items {
@@ -410,9 +410,18 @@
                 font-size: 8vh;
                 margin-left: -45vw;
                 margin-top: 4vh;
+                transition: transform 0.5s ease;
+				background-color:#F0F0F0;
             }   
         }
-
+		#text1{
+			margin-top:30vh;
+			font-size:2.5vh;
+			margin-left:4vw;
+			font-family: futura;
+			position:absolute;
+			
+		}
         /* Voor DESKTOP */
         @media only screen and (min-width: 601px) {
             .col-1 {width: 8.33%;}
@@ -466,6 +475,16 @@
     </div> 
 
     <div class="tab-container">
+		
+		
+		
+		
+		<h2 id="text1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus egestas placerat nibh, eu facilisis ligula viverra a. Donec feugiat felis vel ultricies efficitur. Cras bibendum nec nisi vitae semper. Cras fringilla lectus vel dui commodo, eget efficitur risus iaculis. In hendrerit mollis gravida. Aenean posuere justo cursus sem posuere, sed <br>bibendum velit volutpat. Sed feugiat efficitur sem ut.
+ </h2>
+		<video autoplay muted width="575" style="margin-top:50vh;">
+          <source src="animatie.mp4" type="video/mp4">
+          Your browser does not support the animation :/
+        </video>
         <div class="container2"></div>
         <a href="comic.html">
             <div class="tab" style="z-index:1;">
@@ -517,9 +536,8 @@
         </a>
         <a href="#">
             <div class="tab" style="z-index:4;">
-                <div class="tab-header">Placeholder</div>
+                <div class="tab-header">Laatste tab</div>
                 <div class="tab-content">
-                    <img class="images" src="display/placeholder.png" alt="Comic pagina">
                 </div>
             </div>
         </a>
@@ -538,23 +556,32 @@
 
             // Wacht tot de video is afgelopen om de intro-section te verbergen
             video.addEventListener('ended', () => {
-                // Start de fade-out van de intro-section
                 introSection.classList.add('intro-section--hidden');
-
-                // Herstel de originele achtergrondkleur
                 document.body.style.backgroundColor = '#F0F0F0';
-
-                // Maak andere elementen zichtbaar
                 title.classList.add('titel--visible');
                 navbar.classList.add('navbar--visible');
                 cursorCircle.style.display = 'block';
                 tabs.forEach(tab => tab.classList.add('tab--visible'));
             });
 
-            // Bestaande logica voor tab centering en dynamische titelpositie
-            container.addEventListener('scroll', () => {
+            // Debounce functie om scroll-gebeurtenissen te beperken
+            let isScrolling = false;
+            const debounceScroll = (callback) => {
+                if (!isScrolling) {
+                    isScrolling = true;
+                    requestAnimationFrame(() => {
+                        callback();
+                        isScrolling = false;
+                    });
+                }
+            };
+
+            // Scroll logica
+            const handleScroll = () => {
                 const scrollTop = container.scrollTop;
                 const containerHeight = container.clientHeight;
+                const scrollHeight = container.scrollHeight;
+                const threshold = 50;
 
                 // Vind de bovenste tab die momenteel in beeld is
                 let topmostTab = null;
@@ -570,20 +597,25 @@
 
                 // Pas de positie van de titel aan
                 if (topmostTab) {
-                    const titleHeight = title.offsetHeight; // Hoogte van de titel
-                    const tabTop = topmostTab.offsetTop - scrollTop; // Positie van de bovenste tab
-                    const titleBottom = titleHeight + 20 * window.innerHeight / 100; // Onderkant van de titel (inclusief margin-top: 5vh)
+                    const titleHeight = title.offsetHeight;
+                    const tabTop = topmostTab.offsetTop - scrollTop;
+                    const titleBottom = titleHeight + 20 * window.innerHeight / 100;
 
                     // Als de bovenste tab de onderkant van de titel nadert, duw de titel omhoog
-                    if (tabTop < titleBottom + 20) { // 20px buffer voor soepele overgang
-                        const pushUpDistance = titleBottom - tabTop + 20; // Hoeveel de titel omhoog moet
+                    if (tabTop < titleBottom + 20) {
+                        const pushUpDistance = titleBottom - tabTop + 20;
                         title.style.transform = `translateY(-${pushUpDistance}px)`;
                     } else {
-                        // Als er geen overlap is, zet de titel terug naar de oorspronkelijke positie
+                        // Als er geen overlap is, laat de titel op zijn plek (wordt later gereset)
                         title.style.transform = 'translateY(0)';
                     }
                 } else {
-                    // Als er geen tabs in beeld zijn, zet de titel terug
+                    // Als er geen tabs in beeld zijn, zet de titel terug naar originele positie
+                    title.style.transform = 'translateY(0)';
+                }
+
+                // Detecteer het einde van de scroll en reset de titel
+                if (scrollHeight - scrollTop - containerHeight < threshold) {
                     title.style.transform = 'translateY(0)';
                 }
 
@@ -634,6 +666,11 @@
 
                     tab.style.opacity = opacity;
                 });
+            };
+
+            // Gebruik debounce voor de scroll-eventlistener
+            container.addEventListener('scroll', () => {
+                debounceScroll(handleScroll);
             });
 
             container.scrollTop = 0;
@@ -641,67 +678,19 @@
 
         // Cursor circle
         const circle = document.getElementById('cursor-circle');
-
-        // Variabelen om de vorige positie en tijd bij te houden
-        let lastX = 0;
-        let lastY = 0;
-        let lastTime = 0;
-
         document.addEventListener('mousemove', (e) => {
-            // Huidige positie en tijd
-            const currentX = e.clientX;
-            const currentY = e.clientY;
-            const currentTime = performance.now();
+            circle.style.left = e.clientX + 'px';
+            circle.style.top = e.clientY + 'px';
 
-            // Bereken de snelheid en richting
-            const deltaX = currentX - lastX;
-            const deltaY = currentY - lastY;
-            const deltaTime = (currentTime - lastTime) / 1000;
-            const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-            const speed = distance / deltaTime;
-
-            // Update de positie van het bolletje
-            circle.style.left = currentX + 'px';
-            circle.style.top = currentY + 'px';
-
-            // Controleer het element waar de muis overheen gaat
             const target = e.target;
             const computedStyle = window.getComputedStyle(target);
             const cursorStyle = computedStyle.cursor;
 
-            // Als de cursor in tekstselectie-modus is (cursor: text), verander de vorm naar een lijn
             if (cursorStyle === 'text') {
                 circle.classList.add('text-select');
             } else {
                 circle.classList.remove('text-select');
-
-                // Bepaal de richting van de beweging
-                const absDeltaX = Math.abs(deltaX);
-                const absDeltaY = Math.abs(deltaY);
-                const totalDelta = absDeltaX + absDeltaY;
-
-                // Bereken de "richtingfactor" (0 = volledig verticaal, 1 = volledig horizontaal)
-                const horizontalFactor = totalDelta > 0 ? absDeltaX / totalDelta : 0.5;
-                const verticalFactor = totalDelta > 0 ? absDeltaY / totalDelta : 0.5;
-
-                // Pas de afmetingen aan op basis van snelheid en richting
-                const maxDimension = 30;
-                const minDimension = 5;
-                const maxSpeed = 2000;
-                const speedFactor = Math.min(speed / maxSpeed, 1);
-
-                const newWidth = maxDimension - (maxDimension - minDimension) * speedFactor * horizontalFactor;
-                const newHeight = maxDimension - (maxDimension - minDimension) * speedFactor * verticalFactor;
-
-                circle.style.width = `${newWidth}px`;
-                circle.style.height = `${newHeight}px`;
-                circle.style.borderRadius = '50%';
             }
-
-            // Update de vorige positie en tijd
-            lastX = currentX;
-            lastY = currentY;
-            lastTime = currentTime;
         });
     </script>
 </body>
