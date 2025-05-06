@@ -112,16 +112,15 @@ table {
      
     #Portfolio {
         height: 15vh;
-        width: 50vw;
         font-family: "futura-pt", sans-serif;
         font-weight: 600;
         font-style: normal;
         font-size: 80px;
-        display: inline-block;
         transform: skewX(-10deg);
-        padding-top: 2.5vh;
-        padding-left: 5vw;
         border: none;
+        position: inherit;
+        padding-top: 4vh;
+        padding-left: 5vw;
     }
     
 
@@ -146,6 +145,7 @@ table {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        position: absolute;
     }
 
     .line {
@@ -213,8 +213,10 @@ table {
     .menu-items a {
         text-decoration: none;
         color: #333;
-        font-size: 28px;
-        font-weight: bold;
+        font-family: "futura-pt", sans-serif;
+        font-weight: 600;
+        font-style: normal;
+        font-size: 50px;
         transition: color 0.3s ease;
     }
 
