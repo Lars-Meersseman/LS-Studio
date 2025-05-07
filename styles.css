@@ -162,31 +162,15 @@
                 animation: stretch-and-spin 0.3s ease forwards, pulse-line 1.5s infinite ease-in-out;
             }
 
-            .tab-header, .menu-items a, #titel {
+            .tab-header, .menu-items a, #text1, #titel {
                 cursor: text;
             }
 
             body {
                 margin: 0;
                 display: flex;
-                justify-content: center;
-                align-items: center;
                 background: #F0F0F0;
                 overflow-x: hidden;
-            }
-
-            .tab-container {
-                z-index: 0;
-                width: 100%;
-                height: 200vh;
-                margin-top: -100vh;
-                perspective: 1500px;
-                overflow-y: auto;
-                scroll-snap-type: y proximity;
-                scroll-behavior: smooth;
-                scrollbar-width: none;
-                padding-top: 0;
-                padding-bottom: 100px;
             }
 
             .tab-container::-webkit-scrollbar {
@@ -212,9 +196,9 @@
             }
 
             .container2 {
-                height: 100vh;
+				
+                height: 50vh;
                 background: #F0F0F0;
-                scroll-snap-align: start;
             }
 
             .tab-header {
@@ -290,7 +274,7 @@
             .line {
                 width: 8px;
                 height: 25px;
-                background-color: black;
+                background-color: #333;
                 transition: all 0.3s ease;
                 position: absolute;
             }
@@ -301,7 +285,7 @@
             }
 
             .line3 {
-                transform: rotate(45deg) translate(4px, 22.5px);
+                transform: rotate(45deg) translate(6px, 21.5px);
                 transform-origin: center;
             }
 
@@ -312,7 +296,7 @@
                 height: 20px;
                 margin-left: 4.5px;
                 margin-top: 6px;
-                background-color: black;
+                background-color: #333;
             }
             .containertitel {
                 width: 100%;
@@ -325,7 +309,7 @@
                 transform-origin: left;
                 width: 8px;
                 height: 25px;
-                background-color: black;
+                background-color: #333;
             }
 
             .menu-items {
@@ -384,29 +368,64 @@
                 left: 0;
                 width: 100%;
                 height: 100vh;
-                background: #1e90ff;
+                background: black;
                 z-index: 10000;
                 opacity: 1; 
-                transition: opacity 1s ease;
+                transition: opacity 5s ease;
             }
 
             .intro-section--hidden {
                 opacity: 0;
                 display: none;
             }
-            #titel {
-                font-family: "futura";
-                position: absolute;
-                top: 0px;
-                z-index: 1;
-                color: #333;
-                cursor: text;
-                font-size: 8vh;
-                margin-left: -45vw;
-                margin-top: 4vh;
-            }   
-        }
 
+.tab-container {
+    z-index: 0;
+    width: 100%;
+    height: 200vh;
+    margin-top: -100vh;
+    perspective: 1500px;
+    overflow-y: auto;
+    scroll-snap-type: y proximity;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding-top: 0;
+    padding-bottom: 100px;
+    transform: translateY(100vh);
+    transition: transform 1s ease; 
+}
+
+.tab-container.slide-up {
+    transform: translateY(0);
+}
+
+#titel {
+    font-family: "futura";
+    position: absolute;
+    top: 0px;
+    z-index: 1;
+    color: #333;
+    cursor: text;
+    font-size: 8vh;
+    margin-left: -45vw;
+    margin-top: 4vh;
+    transition: transform 0.5s ease;
+    background-color: #F0F0F0;
+    transform: translateY(100vh);
+}
+
+#titel.titel-visible {
+    transform: translateY(0)
+}  
+        }
+		#text1{
+			margin-top:30vh;
+			font-size:2.5vh;
+			margin-left:4vw;
+			font-family: futura;
+			position:absolute;
+			
+		}
         /* Voor DESKTOP */
         @media only screen and (min-width: 601px) {
             .col-1 {width: 8.33%;}

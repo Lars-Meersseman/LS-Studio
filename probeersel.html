@@ -181,20 +181,6 @@
                 overflow-x: hidden;
             }
 
-            .tab-container {
-                z-index: 0;
-                width: 100%;
-                height: 200vh;
-                margin-top: -100vh;
-                perspective: 1500px;
-                overflow-y: auto;
-                scroll-snap-type: y proximity;
-                scroll-behavior: smooth;
-                scrollbar-width: none;
-                padding-top: 0;
-                padding-bottom: 100px;
-            }
-
             .tab-container::-webkit-scrollbar {
                 display: none;
             }
@@ -390,29 +376,57 @@
                 left: 0;
                 width: 100%;
                 height: 100vh;
-                background: #1e90ff;
+                background: black;
                 z-index: 10000;
                 opacity: 1; 
-                transition: opacity 1s ease;
+                transition: opacity 5s ease;
             }
 
             .intro-section--hidden {
                 opacity: 0;
                 display: none;
             }
-            #titel {
-                font-family: "futura";
-                position: absolute;
-                top: 0px;
-                z-index: 1;
-                color: #333;
-                cursor: text;
-                font-size: 8vh;
-                margin-left: -45vw;
-                margin-top: 4vh;
-                transition: transform 0.5s ease;
-				background-color:#F0F0F0;
-            }   
+            /* Bestaande CSS blijft grotendeels hetzelfde, voeg deze aanpassingen toe */
+
+.tab-container {
+    z-index: 0;
+    width: 100%;
+    height: 200vh;
+    margin-top: -100vh;
+    perspective: 1500px;
+    overflow-y: auto;
+    scroll-snap-type: y proximity;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding-top: 0;
+    padding-bottom: 100px;
+    transform: translateY(100vh); /* Startpositie: onderaan het scherm */
+    transition: transform 1s ease; /* Vloeiende animatie van 1 seconde */
+}
+
+.tab-container.slide-up {
+    transform: translateY(0); /* Eindpositie: normaal bovenaan */
+}
+
+/* Zorg ervoor dat andere elementen (zoals #titel) ook meeschuiven */
+#titel {
+    font-family: "futura";
+    position: absolute;
+    top: 0px;
+    z-index: 1;
+    color: #333;
+    cursor: text;
+    font-size: 8vh;
+    margin-left: -45vw;
+    margin-top: 4vh;
+    transition: transform 0.5s ease;
+    background-color: #F0F0F0;
+    transform: translateY(100vh); /* Startpositie: onderaan meeschuiven */
+}
+
+#titel.titel-visible {
+    transform: translateY(0); /* Eindpositie: normaal bovenaan */
+}  
         }
 		#text1{
 			margin-top:30vh;
@@ -447,8 +461,8 @@
     <div id="cursor-circle"></div>
     <div class="intro-section">
         <div class="video">
-        <video autoplay muted width="575" style="margin-top:25vh;">
-          <source src="animatie.mp4" type="video/mp4">
+        <video autoplay muted width="575" style="margin-top:0vh; width:80%; margin-left:10vw;">
+          <source src="animations/Introphone.mp4" type="video/mp4">
           Your browser does not support the animation :/
         </video>
         </div>
@@ -481,8 +495,8 @@
 		
 		<h2 id="text1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus egestas placerat nibh, eu facilisis ligula viverra a. Donec feugiat felis vel ultricies efficitur. Cras bibendum nec nisi vitae semper. Cras fringilla lectus vel dui commodo, eget efficitur risus iaculis. In hendrerit mollis gravida. Aenean posuere justo cursus sem posuere, sed <br>bibendum velit volutpat. Sed feugiat efficitur sem ut.
  </h2>
-		<video autoplay muted width="575" style="margin-top:50vh;">
-          <source src="animatie.mp4" type="video/mp4">
+		<video autoplay loop muted width="575" style="margin-top:55vh; width:100%;">
+          <source src="animations/fullcomp.mp4" type="video/mp4">
           Your browser does not support the animation :/
         </video>
         <div class="container2"></div>
@@ -545,153 +559,152 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const container = document.querySelector('.tab-container');
-            const tabs = document.querySelectorAll('.tab');
-            const introSection = document.querySelector('.intro-section');
-            const title = document.querySelector('#titel');
-            const navbar = document.querySelector('.navbar');
-            const cursorCircle = document.querySelector('#cursor-circle');
-            const video = document.querySelector('video'); // Selecteer het video element
+       document.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('.tab-container');
+    const tabs = document.querySelectorAll('.tab');
+    const introSection = document.querySelector('.intro-section');
+    const title = document.querySelector('#titel');
+    const navbar = document.querySelector('.navbar');
+    const cursorCircle = document.querySelector('#cursor-circle');
+    const video = document.querySelector('video'); // Selecteer het video element
 
-            // Wacht tot de video is afgelopen om de intro-section te verbergen
-            video.addEventListener('ended', () => {
-                introSection.classList.add('intro-section--hidden');
-                document.body.style.backgroundColor = '#F0F0F0';
-                title.classList.add('titel--visible');
-                navbar.classList.add('navbar--visible');
-                cursorCircle.style.display = 'block';
-                tabs.forEach(tab => tab.classList.add('tab--visible'));
+    // Wacht tot de video is afgelopen om de intro-section te verbergen en de animatie te starten
+    video.addEventListener('ended', () => {
+        introSection.classList.add('intro-section--hidden');
+        document.body.style.backgroundColor = '#F0F0F0';
+        container.classList.add('slide-up'); // Start de schuif-animatie voor de container
+        title.classList.add('titel-visible'); // Laat de titel meeschuiven
+        navbar.classList.add('navbar--visible');
+        cursorCircle.style.display = 'block';
+        tabs.forEach(tab => tab.classList.add('tab--visible'));
+    });
+
+    // Debounce functie om scroll-gebeurtenissen te beperken
+    let isScrolling = false;
+    const debounceScroll = (callback) => {
+        if (!isScrolling) {
+            isScrolling = true;
+            requestAnimationFrame(() => {
+                callback();
+                isScrolling = false;
             });
+        }
+    };
 
-            // Debounce functie om scroll-gebeurtenissen te beperken
-            let isScrolling = false;
-            const debounceScroll = (callback) => {
-                if (!isScrolling) {
-                    isScrolling = true;
-                    requestAnimationFrame(() => {
-                        callback();
-                        isScrolling = false;
-                    });
-                }
-            };
+    // Scroll logica
+    const handleScroll = () => {
+        const scrollTop = container.scrollTop;
+        const containerHeight = container.clientHeight;
+        const scrollHeight = container.scrollHeight;
+        const threshold = 50;
 
-            // Scroll logica
-            const handleScroll = () => {
-                const scrollTop = container.scrollTop;
-                const containerHeight = container.clientHeight;
-                const scrollHeight = container.scrollHeight;
-                const threshold = 50;
+        // Vind de bovenste tab die momenteel in beeld is
+        let topmostTab = null;
+        let minTop = Infinity;
 
-                // Vind de bovenste tab die momenteel in beeld is
-                let topmostTab = null;
-                let minTop = Infinity;
-
-                tabs.forEach(tab => {
-                    const tabTop = tab.offsetTop - scrollTop;
-                    if (tabTop < minTop && tabTop > -tab.clientHeight) {
-                        minTop = tabTop;
-                        topmostTab = tab;
-                    }
-                });
-
-                // Pas de positie van de titel aan
-                if (topmostTab) {
-                    const titleHeight = title.offsetHeight;
-                    const tabTop = topmostTab.offsetTop - scrollTop;
-                    const titleBottom = titleHeight + 20 * window.innerHeight / 100;
-
-                    // Als de bovenste tab de onderkant van de titel nadert, duw de titel omhoog
-                    if (tabTop < titleBottom + 20) {
-                        const pushUpDistance = titleBottom - tabTop + 20;
-                        title.style.transform = `translateY(-${pushUpDistance}px)`;
-                    } else {
-                        // Als er geen overlap is, laat de titel op zijn plek (wordt later gereset)
-                        title.style.transform = 'translateY(0)';
-                    }
-                } else {
-                    // Als er geen tabs in beeld zijn, zet de titel terug naar originele positie
-                    title.style.transform = 'translateY(0)';
-                }
-
-                // Detecteer het einde van de scroll en reset de titel
-                if (scrollHeight - scrollTop - containerHeight < threshold) {
-                    title.style.transform = 'translateY(0)';
-                }
-
-                // Bestaande logica voor tab centering
-                let closestTab = null;
-                let minDistanceFromCenter = Infinity;
-                let closestTabIndex = -1;
-
-                tabs.forEach((tab, index) => {
-                    const tabTop = tab.offsetTop - scrollTop;
-                    const tabCenter = tabTop + tab.clientHeight / 2;
-                    const screenCenter = containerHeight / 2;
-                    const distanceFromCenter = Math.abs(tabCenter - screenCenter);
-
-                    if (distanceFromCenter < minDistanceFromCenter) {
-                        minDistanceFromCenter = distanceFromCenter;
-                        closestTab = tab;
-                        closestTabIndex = index;
-                    }
-                });
-
-                tabs.forEach((tab, index) => {
-                    const tabTop = tab.offsetTop - scrollTop;
-                    const tabCenter = tabTop + tab.clientHeight / 2;
-                    const screenCenter = containerHeight / 2;
-                    const distanceFromCenter = Math.abs(tabCenter - screenCenter);
-
-                    const scale = Math.max(1, 1 - distanceFromCenter / containerHeight);
-                    const opacity = Math.max(1, 1 - distanceFromCenter / containerHeight);
-
-                    tab.classList.remove('tab--centered');
-
-                    const isAbove = index < closestTabIndex;
-                    const isBelow = index > closestTabIndex;
-
-                    if (tab === closestTab) {
-                        tab.classList.add('tab--centered');
-                        tab.style.transform = `rotateX(0deg) scale(${scale}) translateY(150px)`;
-                    } else {
-                        let translateYValue = 0;
-                        if (isAbove) {
-                            translateYValue = -150;
-                        } else if (isBelow) {
-                            translateYValue = 300;
-                        }
-                        tab.style.transform = `rotateX(-40deg) scale(${scale}) translateY(${translateYValue}px)`;
-                    }
-
-                    tab.style.opacity = opacity;
-                });
-            };
-
-            // Gebruik debounce voor de scroll-eventlistener
-            container.addEventListener('scroll', () => {
-                debounceScroll(handleScroll);
-            });
-
-            container.scrollTop = 0;
-        });
-
-        // Cursor circle
-        const circle = document.getElementById('cursor-circle');
-        document.addEventListener('mousemove', (e) => {
-            circle.style.left = e.clientX + 'px';
-            circle.style.top = e.clientY + 'px';
-
-            const target = e.target;
-            const computedStyle = window.getComputedStyle(target);
-            const cursorStyle = computedStyle.cursor;
-
-            if (cursorStyle === 'text') {
-                circle.classList.add('text-select');
-            } else {
-                circle.classList.remove('text-select');
+        tabs.forEach(tab => {
+            const tabTop = tab.offsetTop - scrollTop;
+            if (tabTop < minTop && tabTop > -tab.clientHeight) {
+                minTop = tabTop;
+                topmostTab = tab;
             }
         });
+
+        // Pas de positie van de titel aan
+        if (topmostTab) {
+            const titleHeight = title.offsetHeight;
+            const tabTop = topmostTab.offsetTop - scrollTop;
+            const titleBottom = titleHeight + 20 * window.innerHeight / 100;
+
+            // Als de bovenste tab de onderkant van de titel nadert, duw de titel omhoog
+            if (tabTop < titleBottom + 20) {
+                const pushUpDistance = titleBottom - tabTop + 20;
+                title.style.transform = `translateY(-${pushUpDistance}px)`;
+            } else {
+                title.style.transform = 'translateY(0)';
+            }
+        } else {
+            title.style.transform = 'translateY(0)';
+        }
+
+        // Detecteer het einde van de scroll en reset de titel
+        if (scrollHeight - scrollTop - containerHeight < threshold) {
+            title.style.transform = 'translateY(0)';
+        }
+
+        // Bestaande logica voor tab centering
+        let closestTab = null;
+        let minDistanceFromCenter = Infinity;
+        let closestTabIndex = -1;
+
+        tabs.forEach((tab, index) => {
+            const tabTop = tab.offsetTop - scrollTop;
+            const tabCenter = tabTop + tab.clientHeight / 2;
+            const screenCenter = containerHeight / 2;
+            const distanceFromCenter = Math.abs(tabCenter - screenCenter);
+
+            if (distanceFromCenter < minDistanceFromCenter) {
+                minDistanceFromCenter = distanceFromCenter;
+                closestTab = tab;
+                closestTabIndex = index;
+            }
+        });
+
+        tabs.forEach((tab, index) => {
+            const tabTop = tab.offsetTop - scrollTop;
+            const tabCenter = tabTop + tab.clientHeight / 2;
+            const screenCenter = containerHeight / 2;
+            const distanceFromCenter = Math.abs(tabCenter - screenCenter);
+
+            const scale = Math.max(1, 1 - distanceFromCenter / containerHeight);
+            const opacity = Math.max(1, 1 - distanceFromCenter / containerHeight);
+
+            tab.classList.remove('tab--centered');
+
+            const isAbove = index < closestTabIndex;
+            const isBelow = index > closestTabIndex;
+
+            if (tab === closestTab) {
+                tab.classList.add('tab--centered');
+                tab.style.transform = `rotateX(0deg) scale(${scale}) translateY(150px)`;
+            } else {
+                let translateYValue = 0;
+                if (isAbove) {
+                    translateYValue = -150;
+                } else if (isBelow) {
+                    translateYValue = 300;
+                }
+                tab.style.transform = `rotateX(-40deg) scale(${scale}) translateY(${translateYValue}px)`;
+            }
+
+            tab.style.opacity = opacity;
+        });
+    };
+
+    // Gebruik debounce voor de scroll-eventlistener
+    container.addEventListener('scroll', () => {
+        debounceScroll(handleScroll);
+    });
+
+    container.scrollTop = 0;
+});
+
+// Cursor circle
+const circle = document.getElementById('cursor-circle');
+document.addEventListener('mousemove', (e) => {
+    circle.style.left = e.clientX + 'px';
+    circle.style.top = e.clientY + 'px';
+
+    const target = e.target;
+    const computedStyle = window.getComputedStyle(target);
+    const cursorStyle = computedStyle.cursor;
+
+    if (cursorStyle === 'text') {
+        circle.classList.add('text-select');
+    } else {
+        circle.classList.remove('text-select');
+    }
+});
     </script>
 </body>
 </html>
