@@ -1,26 +1,51 @@
 <!doctype html>
 <html>
 <head>
+<link href="styleABT.css" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
-<title>Comic</title>
+<title>Comic work</title>
 </head>
 
 <body>
+	<div class="row">
+		<div class="col-m-9">
+			
+			<div id="titel">Comic</div> 
+		
+		</div>
+		<div class="col-m-3">
+			
+			<div id="containerhamburger">
+        <nav class="navbar">
+            <input type="checkbox" class="hamburger-checkbox" id="hamburger-checkbox">
+            <label for="hamburger-checkbox" class="hamburger-label">
+                <span class="line line1"></span>
+                <span class="line line3"></span>
+            </label>
+            <ul class="menu-items">
+                <li><a href="Landing.html">Portfolio</a></li>
+                <div class="thinline"></div>
+                <li><a href="about-us.html">About Us</a></li>
+                <div class="thinline"></div>
+                <li><a href="contact.html">Contact</a></li>
+                <div class="social-icons">
+                    <img src="icons/insta.png" alt="instagram">
+                    <img src="icons/x.webp" alt="X">
+                </div>
+            </ul>
+        </nav>
+    </div>
+		</div>
+	</div>
+	<div class="row">
+	<div class="col-m-7">
+		<div class="titelproject">COMIC PROJECT</div>
+		<img class="project" src="werken/Comic/comic.png" alt="YOur borwser does not support this photo"/>	
+	</div>
+	<div class="col-m-5">
+		<h2 id="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus egestas placerat nibh, eu facilisis ligula viverra a. Donec feugiat felis vel ultricies efficitur. Cras bibendum nec nisi vitae semper. Cras fringilla lectus vel dui commodo, eget efficitur risus iaculis. In hendrerit mollis gravida. Aenean posuere justo cursus sem posuere, sed <br>bibendum velit volutpat. Sed feugiat efficitur sem ut.</h2>
+		</div>
+	</div>
+
 </body>
 </html>
-.intro-section {
-                position: fixed; /* Zorgt ervoor dat het blauwe scherm over de hele pagina ligt */
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100vh;
-                background: #1e90ff; /* Blauw scherm */
-                z-index: 10000; /* Zorgt ervoor dat het boven alles ligt */
-                opacity: 1; /* Start volledig zichtbaar */
-                transition: opacity 1s ease; /* Fade-out overgang */
-            }
-
-            .intro-section--hidden {
-                opacity: 0; /* Fade-out na 5 seconden */
-                display: none; /* Verberg volledig na de fade-out */
-            }
