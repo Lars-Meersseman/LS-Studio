@@ -219,7 +219,7 @@
 				
 			}
 			#initialsL{
-				color:black;
+				color:#333;
 				font-family: futura;
 				font-size:10vh;
 				margin-top:45vh;
@@ -227,7 +227,7 @@
 				
 			}
 			#initialsS{
-				color:black;
+				color:#333;
 				font-family: futura;
 				font-size:10vh;
 				margin-top:115vh;
@@ -235,7 +235,7 @@
 				
 			}
 			#text{
-				color:black;
+				color:#333;
 				font-family: futura;
 				font-size:2vh;
 				margin-top:10vh;
@@ -247,7 +247,7 @@
 			.titelproject{
 				text-align: center;
 				font-family: futura;
-				font-size:3vh;
+				font-size:3vh;color:#333;
 				margin-top:10vh;
 				
 			}
