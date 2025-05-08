@@ -4,48 +4,135 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
 }
+
 body {
-	line-height: 1;
+    line-height: 1;
 }
-ol, ul {
-	list-style: none;
+
+ol,
+ul {
+    list-style: none;
 }
-blockquote, q {
-	quotes: none;
+
+blockquote,
+q {
+    quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
 }
+
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
 /* EINDE CSS RESET */
@@ -53,6 +140,7 @@ table {
 * {
     box-sizing: border-box;
 }
+
 .row:after {
     content: "";
     clear: both;
@@ -62,23 +150,58 @@ table {
 [class*="col-"] {
     float: left;
     width: 100%;
-	/* Ter demonstratie hebben kolommen een border, doe maar weg voor je eigen werk */
+    /* Ter demonstratie hebben kolommen een border, doe maar weg voor je eigen werk */
 }
 
 /* Voor MOBIEL */
 @media only screen and (max-width: 600px) {
-    .col-m-1 {width: 8.33%;}
-    .col-m-2 {width: 16.66%;}
-    .col-m-3 {width: 25%;}
-    .col-m-4 {width: 33.33%;}
-    .col-m-5 {width: 41.66%;}
-    .col-m-6 {width: 50%;}
-    .col-m-7 {width: 58.33%;}
-    .col-m-8 {width: 66.66%;}
-    .col-m-9 {width: 75%;}
-    .col-m-10 {width: 83.33%;}
-    .col-m-11 {width: 91.66%;}
-    .col-m-12 {width: 100%;}
+    .col-m-1 {
+        width: 8.33%;
+    }
+
+    .col-m-2 {
+        width: 16.66%;
+    }
+
+    .col-m-3 {
+        width: 25%;
+    }
+
+    .col-m-4 {
+        width: 33.33%;
+    }
+
+    .col-m-5 {
+        width: 41.66%;
+    }
+
+    .col-m-6 {
+        width: 50%;
+    }
+
+    .col-m-7 {
+        width: 58.33%;
+    }
+
+    .col-m-8 {
+        width: 66.66%;
+    }
+
+    .col-m-9 {
+        width: 75%;
+    }
+
+    .col-m-10 {
+        width: 83.33%;
+    }
+
+    .col-m-11 {
+        width: 91.66%;
+    }
+
+    .col-m-12 {
+        width: 100%;
+    }
 
     #blueonmobile {
         background-color: blue;
@@ -90,18 +213,53 @@ table {
 
 /* Voor IPAD */
 @media only screen and (min-width: 601px) and (max-width: 1024px) {
-    .col-t-1 {width: 8.33%;}
-    .col-t-2 {width: 16.66%;}
-    .col-t-3 {width: 25%;}
-    .col-t-4 {width: 33.33%;}
-    .col-t-5 {width: 41.66%;}
-    .col-t-6 {width: 50%;}
-    .col-t-7 {width: 58.33%;}
-    .col-t-8 {width: 66.66%;}
-    .col-t-9 {width: 75%;}
-    .col-t-10 {width: 83.33%;}
-    .col-t-11 {width: 91.66%;}
-    .col-t-12 {width: 100%;}
+    .col-t-1 {
+        width: 8.33%;
+    }
+
+    .col-t-2 {
+        width: 16.66%;
+    }
+
+    .col-t-3 {
+        width: 25%;
+    }
+
+    .col-t-4 {
+        width: 33.33%;
+    }
+
+    .col-t-5 {
+        width: 41.66%;
+    }
+
+    .col-t-6 {
+        width: 50%;
+    }
+
+    .col-t-7 {
+        width: 58.33%;
+    }
+
+    .col-t-8 {
+        width: 66.66%;
+    }
+
+    .col-t-9 {
+        width: 75%;
+    }
+
+    .col-t-10 {
+        width: 83.33%;
+    }
+
+    .col-t-11 {
+        width: 91.66%;
+    }
+
+    .col-t-12 {
+        width: 100%;
+    }
 
     .row {
         height: 15vh;
@@ -109,7 +267,7 @@ table {
         background-color: none;
         border: solid 1px black;
     }
-     
+
     #Portfolio {
         height: 15vh;
         font-family: "futura-pt", sans-serif;
@@ -122,7 +280,7 @@ table {
         padding-top: 4vh;
         padding-left: 5vw;
     }
-    
+
 
     /* Hamburger-menu stijlen */
     .navbar {
@@ -167,7 +325,7 @@ table {
         transform-origin: center;
     }
 
-    .hamburger-checkbox:checked + .hamburger-label .line1 {
+    .hamburger-checkbox:checked+.hamburger-label .line1 {
         transform: rotate(-45deg) translate(-35.2px, -3px);
         transform-origin: left;
         width: 8px;
@@ -177,7 +335,7 @@ table {
         background-color: black;
     }
 
-    .hamburger-checkbox:checked + .hamburger-label .line3 {
+    .hamburger-checkbox:checked+.hamburger-label .line3 {
         transform: rotate(45deg) translate(10px, 23px);
         transform-origin: left;
         width: 8px;
@@ -201,7 +359,7 @@ table {
         z-index: 1000;
     }
 
-    .hamburger-checkbox:checked ~ .menu-items {
+    .hamburger-checkbox:checked~.menu-items {
         transform: translateY(0);
     }
 
@@ -243,28 +401,85 @@ table {
     /* Zorg dat hamburger-menu in de grid-col blijft */
     #hamburger-menu {
         position: relative;
-        text-align: right; /* Pijltje rechts uitlijnen */
+        text-align: right;
+        /* Pijltje rechts uitlijnen */
     }
 
-    
+    .swiper {
+        width: 80%;
+        height: 50vh;
+        border: solid 1px red;
+        display: flex;
+        font-family: "futura-pt", sans-serif;
+        font-weight: 600;
+        font-style: normal;
+        font-size: 20px;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+
+    }
+
+    #swiper-slide1 {
+        background-image: url("werken/Comic/comic.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+
 
 
 }
 
 /* Voor DESKTOP */
 @media only screen and (min-width: 1025px) {
-    .col-1 {width: 8.33%;}
-    .col-2 {width: 16.66%;}
-    .col-3 {width: 25%;}
-    .col-4 {width: 33.33%;}
-    .col-5 {width: 41.66%;}
-    .col-6 {width: 50%;}
-    .col-7 {width: 58.33%;}
-    .col-8 {width: 66.66%;}
-    .col-9 {width: 75%;}
-    .col-10 {width: 83.33%;}
-    .col-11 {width: 91.66%;}
-    .col-12 {width: 100%;}
+    .col-1 {
+        width: 8.33%;
+    }
+
+    .col-2 {
+        width: 16.66%;
+    }
+
+    .col-3 {
+        width: 25%;
+    }
+
+    .col-4 {
+        width: 33.33%;
+    }
+
+    .col-5 {
+        width: 41.66%;
+    }
+
+    .col-6 {
+        width: 50%;
+    }
+
+    .col-7 {
+        width: 58.33%;
+    }
+
+    .col-8 {
+        width: 66.66%;
+    }
+
+    .col-9 {
+        width: 75%;
+    }
+
+    .col-10 {
+        width: 83.33%;
+    }
+
+    .col-11 {
+        width: 91.66%;
+    }
+
+    .col-12 {
+        width: 100%;
+    }
 
     #blueonmobile {
         background-color: lightgray;
@@ -273,4 +488,3 @@ table {
         text-align: center;
     }
 }
-
