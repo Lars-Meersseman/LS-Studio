@@ -184,7 +184,6 @@
                 margin: 50px auto;
                 background: #fff;
                 border-radius: 10px;
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
                 transform: rotateX(-40deg);
                 transition: transform 0.8s ease, opacity 0.8s ease;
                 scroll-snap-align: center;
@@ -196,7 +195,7 @@
             }
 
             .container2 {
-				
+				margin-top:-50vh;
                 height: 50vh;
                 background: #F0F0F0;
             }
@@ -227,13 +226,20 @@
                 background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), transparent);
                 pointer-events: none;
             }
-
+			#kijkeens{
+				font-family: futura;
+				font-size: 4vh;
+				text-align:center;
+				margin-top:55vh;
+				position:absolute;
+			}
             .images {
                 border-top-left-radius: 0px;
                 border-top-right-radius: 0px;
                 border-bottom-right-radius: 10px;
                 border-bottom-left-radius: 10px;
-                width: 80vw;
+                width:80vw;
+				box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
                 margin-top: -3vh;
                 margin-left: -4vw;
             }
