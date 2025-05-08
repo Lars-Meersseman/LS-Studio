@@ -83,7 +83,20 @@
             .col-m-10 {width: 83.33%;}
             .col-m-11 {width: 91.66%;}
             .col-m-12 {width: 100%;}
-			
+			input[type=checkbox] {
+  display: none;
+}
+
+.container img {
+  transition: transform 0.25s ease;
+  cursor: pointer;
+	
+}
+
+input[type=checkbox]:checked ~ label > img {
+  transform: scale(1.5);
+  cursor: pointer;
+}
 			#titel {
     font-family: "futura";
     top: 0px;
@@ -238,7 +251,7 @@
 				color:#333;
 				font-family: futura;
 				font-size:2vh;
-				margin-top:10vh;
+				margin-top:5vh;
 				text-align:center;
 			}
 			.project{
