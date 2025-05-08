@@ -407,7 +407,7 @@ table {
 
     .swiper {
         width: 80%;
-        height: 50vh;
+        height: 70vh;
         border: solid 1px red;
         display: flex;
         font-family: "futura-pt", sans-serif;
@@ -422,8 +422,26 @@ table {
 
     #swiper-slide1 {
         background-image: url("werken/Comic/comic.png");
-        background-size: cover;
+        background-size: contain;
         background-repeat: no-repeat;
+        background-position: center center;
+        width: 100%;
+    }
+
+    #swiper-slide2 {
+        background-image: url("werken/Comic/Lars_cover.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+        width: 100%;
+    }
+
+    #swiper-slide3 {
+        background-image: url("werken/Comic/Photoshop_Comicbook_Seppe_DonkereKleuren.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+        width: 100%;
     }
 
 
