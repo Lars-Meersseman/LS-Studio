@@ -407,8 +407,7 @@ table {
 
     .swiper {
         width: 80%;
-        height: 50vh;
-        border: solid 1px red;
+        height: 70vh;
         display: flex;
         font-family: "futura-pt", sans-serif;
         font-weight: 600;
@@ -421,9 +420,45 @@ table {
     }
 
     #swiper-slide1 {
-        background-image: url("werken/Comic/comic.png");
-        background-size: cover;
+        background-image: url("werken2/Comic/comic.png");
+        background-size: contain;
         background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    #swiper-slide2 {
+        background-image: url("werken2/Comic/Lars_cover.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    #swiper-slide3 {
+        background-image: url("werken2/Comic/Photoshop_Comicbook_Seppe_DonkereKleuren.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    #swiper-slide4 {
+        background-image: url("werken2/Comic/samengevoegdeCover.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    #swiper-slide5 {
+        background-image: url("werken/Comic/comic.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    #swiper-slide6 {
+        background-image: url("werken/Comic/comic.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
     }
 
 
