@@ -83,13 +83,15 @@
             .col-m-10 {width: 83.33%;}
             .col-m-11 {width: 91.66%;}
             .col-m-12 {width: 100%;}
-			input[type=checkbox] {
+			
+input[type=checkbox] {
   display: none;
 }
 
 .container img {
   transition: transform 0.25s ease;
   cursor: pointer;
+	margin-top:10vh;
 	
 }
 
@@ -246,13 +248,6 @@ input[type=checkbox]:checked ~ label > img {
 				margin-top:115vh;
 				text-align: left;
 				
-			}
-			#text{
-				color:#333;
-				font-family: futura;
-				font-size:2vh;
-				margin-top:5vh;
-				text-align:center;
 			}
 			.project{
 				width:100%;
