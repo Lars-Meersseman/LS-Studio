@@ -61,11 +61,12 @@
  @font-face {
                 font-family: Futura;
                 src: local("fonts/Futura-Bold-font.ttf");
+}
         [class*="col-"] {
             float: left;
             width: 100%;
             /* Ter demonstratie hebben kolommen een border, doe maar weg voor je eigen werk */
-            border: solid 1px grey;
+            border: solid 1px #F0F0F0;
         }
 
         /* Voor MOBIEL */
@@ -83,6 +84,21 @@
             .col-m-11 {width: 91.66%;}
             .col-m-12 {width: 100%;}
 			
+input[type=checkbox] {
+  display: none;
+}
+
+.container img {
+  transition: transform 0.25s ease;
+  cursor: pointer;
+	margin-top:10vh;
+	
+}
+
+input[type=checkbox]:checked ~ label > img {
+  transform: scale(1.5);
+  cursor: pointer;
+}
 			#titel {
     font-family: "futura";
     top: 0px;
@@ -218,7 +234,7 @@
 				
 			}
 			#initialsL{
-				color:black;
+				color:#333;
 				font-family: futura;
 				font-size:10vh;
 				margin-top:45vh;
@@ -226,21 +242,28 @@
 				
 			}
 			#initialsS{
-				color:black;
+				color:#333;
 				font-family: futura;
 				font-size:10vh;
 				margin-top:115vh;
 				text-align: left;
 				
 			}
-			#text{
-				color:black;
+			.project{
+				width:100%;
+			}
+			.titelproject{
+				text-align: center;
 				font-family: futura;
-				font-size:2vh;
+				font-size:3vh;color:#333;
 				margin-top:10vh;
-				text-align:center;
+				
+			}
+			#text{
+				
 			}
 }
+
         /* Voor DESKTOP */
         @media only screen and (min-width: 601px) {
             .col-1 {width: 8.33%;}

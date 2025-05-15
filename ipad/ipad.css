@@ -408,15 +408,15 @@ table {
     .swiper {
         width: 80%;
         height: 70vh;
-        border: solid 1px red;
         display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 100px;
         font-family: "futura-pt", sans-serif;
         font-weight: 600;
         font-style: normal;
-        font-size: 20px;
-        justify-content: center;
-        align-items: center;
-        margin-top: 20px;
+        font-size: 30px;
+        text-align: center;
 
     }
 
@@ -437,11 +437,54 @@ table {
     }
 
     #swiper-slide3 {
-        background-image: url("werken/Comic/Photoshop_Comicbook_Seppe_DonkereKleuren.png");
+        width: 100%;
+        background-image: url("werken2/Comic/comic.png");
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center center;
-        width: 100%;
+    }
+
+    #swiper-slide2 {
+        background-image: url("werken2/Comic/Lars_cover.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    #swiper-slide3 {
+        background-image: url("werken2/Comic/Photoshop_Comicbook_Seppe_DonkereKleuren.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    #swiper-slide4 {
+        background-image: url("werken2/Comic/samengevoegdeCover.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    #swiper-slide5 {
+        background-image: url("werken/Comic/comic.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    #swiper-slide6 {
+        background-image: url("werken/Comic/comic.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    /**/
+    
+    .ondersterow {
+        height: 30vh;
+        width: 100vw;
+        border: solid 2px black;
     }
 
 

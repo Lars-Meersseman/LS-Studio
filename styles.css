@@ -228,9 +228,10 @@
             }
 			#kijkeens{
 				font-family: futura;
-				font-size: 4vh;
+				font-size: 3vw;
 				text-align:center;
-				margin-top:55vh;
+				margin-left:21vw;
+				margin-top:51vh;
 				position:absolute;
 			}
             .images {
@@ -238,10 +239,11 @@
                 border-top-right-radius: 0px;
                 border-bottom-right-radius: 10px;
                 border-bottom-left-radius: 10px;
-                width:80vw;
+                width:69.6vw;
+				float:center;
 				box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
                 margin-top: -3vh;
-                margin-left: -4vw;
+                margin-left: -3.5vw;
             }
 
             .extraplace {
@@ -413,7 +415,7 @@
     color: #333;
     cursor: text;
     font-size: 8vh;
-    margin-left: -45vw;
+    margin-left: -35vw;
     margin-top: 4vh;
     transition: transform 0.5s ease;
     background-color: #F0F0F0;
@@ -432,6 +434,13 @@
 			position:absolute;
 			
 		}
+#laatstediv{
+	font-size:3vh;
+	font-family: futura;
+	text-align: center;
+	text-decoration:none;
+	color:#333;
+}
         /* Voor DESKTOP */
         @media only screen and (min-width: 601px) {
             .col-1 {width: 8.33%;}
